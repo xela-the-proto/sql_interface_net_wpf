@@ -21,19 +21,20 @@ namespace sql_interface_net_wpf
     /// </summary>
     public partial class MainWindow : Window
     {
+        DBUpload up = new DBUpload();
         public MainWindow()
         {
             InitializeComponent();
         }
 
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            up.connect(txt_database_ip.Text, txt_database_name.Text, txt_database_user_id.Text, psw_user_database_password.Password);
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            string connetionString;
-            connetionString = "Server=127.0.0.1,3306;Database=xela;User Id=xela;Password=xela;";
-
-            DBUpload up = new DBUpload(connetionString);
-            up.Query("CREATE TABLE IF NOT EXISTS Students (name TEXT(20), surname TEXT(20))");
-
+            up.Query(txt_sql_command.Text);
         }
     }
 }

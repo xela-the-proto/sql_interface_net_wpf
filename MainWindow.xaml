@@ -5,9 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:sql_interface_net_wpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Button Content="Go" Margin="0,0,380,0" Click="Button_Click" Height="20" VerticalAlignment="Center" HorizontalAlignment="Right" Width="40"/>
+        Title="MainWindow" Height="210" Width="550">
+    <Grid RenderTransformOrigin="0.5,0.5">
+        <Grid.RenderTransform>
+            <TransformGroup>
+                <ScaleTransform/>
+                <SkewTransform/>
+                <RotateTransform Angle="0.027"/>
+                <TranslateTransform/>
+            </TransformGroup>
+        </Grid.RenderTransform>
+        <Button Content="Execute Query" Margin="239,143,0,0" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="300" Click="Button_Click"/>
+        <TextBox x:Name="txt_database_ip" HorizontalAlignment="Left" Margin="95,22,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="20" Width="76"><Run Language="it-it" Text="Database Ip"/><LineBreak/><Run Language="it-it"/></TextBlock>
+        <TextBox x:Name="txt_database_name" HorizontalAlignment="Left" Margin="96,53,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBlock HorizontalAlignment="Left" Margin="11,51,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="20" Width="76"><Run Language="it-it" Text="Database"/><LineBreak/><Run Language="it-it"/></TextBlock>
+        <TextBox x:Name="txt_database_user_id" HorizontalAlignment="Left" Margin="95,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="20" Width="76"><Run Language="it-it" Text="User id"/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" Margin="7,119,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="20" Width="76"><Run Language="it-it" Text="Password"/></TextBlock>
+        <Button x:Name="btn_connect" Content="Connect" HorizontalAlignment="Left" Margin="8,150,0,0" VerticalAlignment="Top" Height="19" Width="50" Click="Button_Click_1"/>
+        <PasswordBox x:Name="psw_user_database_password" Margin="95,123,0,0" Width="120" Height="14" VerticalAlignment="Top" HorizontalAlignment="Left" d:LayoutOverrides="Width"/>
+        <Button x:Name="btn_disconnect" Content="Disconnect" HorizontalAlignment="Left" Margin="79,150,0,0" VerticalAlignment="Top" Height="19" Width="70"/>
+        <TextBox x:Name="txt_sql_command" HorizontalAlignment="Left" Margin="240,24,0,0" VerticalAlignment="Top" Width="295" TextWrapping="WrapWithOverflow" Height="111"/>
 
     </Grid>
 </Window>
