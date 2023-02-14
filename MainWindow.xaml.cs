@@ -36,5 +36,25 @@ namespace sql_interface_net_wpf
         {
             up.Query(txt_sql_command.Text);
         }
+
+        public void disable_buttons() {
+            txt_database_ip.IsEnabled = false;
+            txt_database_name.IsEnabled = false;
+            txt_database_user_id.IsEnabled = false;
+            psw_user_database_password.IsEnabled = false;
+            btn_connect.IsEnabled = false;
+            btn_disconnect.IsEnabled = true;
+
+        }
+
+        public void enable_buttons()
+        {
+            mainWindow.txt_database_ip.IsEnabled = true;
+            mainWindow.txt_database_name.IsEnabled = true;
+            mainWindow.txt_database_user_id.IsEnabled = true;
+            mainWindow.psw_user_database_password.IsEnabled = true;
+            mainWindow.btn_connect.IsEnabled = true;
+            mainWindow.btn_disconnect.IsEnabled = false;
+        }
     }
 }

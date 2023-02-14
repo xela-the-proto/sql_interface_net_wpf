@@ -50,12 +50,7 @@ namespace sql_interface_net_wpf.DB
                 conn.Open();
 
                 MainWindow mainWindow = new MainWindow();
-                mainWindow.txt_database_ip.IsEnabled = false;
-                mainWindow.txt_database_name.IsEnabled = false;
-                mainWindow.txt_database_user_id.IsEnabled = false;
-                mainWindow.psw_user_database_password.IsEnabled = false;
-                mainWindow.btn_connect.IsEnabled = false;
-                mainWindow.btn_disconnect.IsEnabled = true;
+                mainWindow.disable_buttons();
             }
             catch (MySqlException e)
             {
@@ -67,12 +62,7 @@ namespace sql_interface_net_wpf.DB
         {
             conn.Close();
             MainWindow mainWindow = new MainWindow();
-            mainWindow.txt_database_ip.IsEnabled = true;
-            mainWindow.txt_database_name.IsEnabled = true;
-            mainWindow.txt_database_user_id.IsEnabled = true;
-            mainWindow.psw_user_database_password.IsEnabled = true;
-            mainWindow.btn_connect.IsEnabled = true;
-            mainWindow.btn_disconnect.IsEnabled = false;
+            mainWindow.enable_buttons();
         }
     }
 }
