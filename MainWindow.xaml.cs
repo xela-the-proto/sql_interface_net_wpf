@@ -21,7 +21,7 @@ namespace sql_interface_net_wpf
     /// </summary>
     public partial class MainWindow : Window
     {
-        DBUpload up = new DBUpload();
+        QueryDb up = new QueryDb();
         public MainWindow()
         {
             InitializeComponent();
@@ -49,12 +49,12 @@ namespace sql_interface_net_wpf
 
         public void enable_buttons()
         {
-            mainWindow.txt_database_ip.IsEnabled = true;
-            mainWindow.txt_database_name.IsEnabled = true;
-            mainWindow.txt_database_user_id.IsEnabled = true;
-            mainWindow.psw_user_database_password.IsEnabled = true;
-            mainWindow.btn_connect.IsEnabled = true;
-            mainWindow.btn_disconnect.IsEnabled = false;
+            txt_database_ip.IsEnabled = true;
+            txt_database_name.IsEnabled = true;
+            txt_database_user_id.IsEnabled = true;
+            psw_user_database_password.IsEnabled = true;
+            btn_connect.IsEnabled = true;
+            btn_disconnect.IsEnabled = false;
         }
     }
 }

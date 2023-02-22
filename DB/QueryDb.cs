@@ -2,6 +2,7 @@
 using Mysqlx;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,17 +10,17 @@ using System.Windows;
 
 namespace sql_interface_net_wpf.DB
 {
-    internal class DBUpload
+    internal class QueryDb
     {
         private string conn_string;
         MySqlConnection conn = new MySqlConnection();
         
-        public DBUpload()
+        public QueryDb()
         {
             conn_string = string.Empty;
         }
 
-        public DBUpload(string conn_string)
+        public QueryDb(string conn_string)
         {
             this.conn_string = conn_string;
         }
@@ -34,9 +35,22 @@ namespace sql_interface_net_wpf.DB
                 comm.ExecuteNonQuery();
 
             }
-            catch (MySqlException ex)
+            catch (MySqlException e)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(e.Message);
+            }
+        }
+
+        public void SaveTable(string command,string collection)
+        {
+            try
+            {
+                DataTable table = conn.GetSchema()
+                
+            }
+            catch (MySqlException e)
+            {
+                MessageBox.Show(e.Message);
             }
         }
 
