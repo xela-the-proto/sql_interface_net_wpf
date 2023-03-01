@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:sql_interface_net_wpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="210" Width="550">
+        Title="MainWindow" Height="210" Width="695">
     <Grid RenderTransformOrigin="0.5,0.5">
         <Grid.RenderTransform>
             <TransformGroup>
@@ -15,7 +15,7 @@
                 <TranslateTransform/>
             </TransformGroup>
         </Grid.RenderTransform>
-        <Button Content="Execute Query" Margin="239,143,0,0" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="300" Click="Button_Click"/>
+        <Button Content="Execute Query" Margin="379,141,0,0" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="300" Click="Button_Click"/>
         <TextBox x:Name="txt_database_ip" HorizontalAlignment="Left" Margin="95,22,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="20" Width="76"><Run Language="it-it" Text="Database Ip"/><LineBreak/><Run Language="it-it"/></TextBlock>
         <TextBox x:Name="txt_database_name" HorizontalAlignment="Left" Margin="96,53,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
@@ -26,7 +26,9 @@
         <Button x:Name="btn_connect" Content="Connect" HorizontalAlignment="Left" Margin="8,150,0,0" VerticalAlignment="Top" Height="19" Width="50" Click="Button_Click_1"/>
         <PasswordBox x:Name="psw_user_database_password" Margin="95,123,0,0" Width="120" Height="14" VerticalAlignment="Top" HorizontalAlignment="Left" d:LayoutOverrides="Width"/>
         <Button x:Name="btn_disconnect" Content="Disconnect" HorizontalAlignment="Left" Margin="79,150,0,0" VerticalAlignment="Top" Height="19" Width="70"/>
-        <TextBox x:Name="txt_sql_command" HorizontalAlignment="Left" Margin="240,24,0,0" VerticalAlignment="Top" Width="295" TextWrapping="WrapWithOverflow" Height="111"/>
+        <TextBox x:Name="txt_sql_command" HorizontalAlignment="Left" Margin="380,27,0,0" VerticalAlignment="Top" Width="295" TextWrapping="WrapWithOverflow" Height="111"/>
+        <Button Margin="250,56,0,0" Click="Button_Click_2" Content="Open" Height="19" VerticalAlignment="Top" HorizontalAlignment="Left" Width="75"/>
+        <Label Content="Or open a .xla file" Margin="235,21,0,0" Height="27" VerticalAlignment="Top" HorizontalAlignment="Left" Width="125"/>
 
     </Grid>
 </Window>

@@ -1,4 +1,5 @@
-﻿using sql_interface_net_wpf.DB;
+﻿using sql_interface_net_wpf.Config;
+using sql_interface_net_wpf.DB;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace sql_interface_net_wpf
     /// </summary>
     public partial class MainWindow : Window
     {
-        QueryDb up = new QueryDb();
+        QueryDb db = new QueryDb();
         public MainWindow()
         {
             InitializeComponent();
@@ -29,12 +30,12 @@ namespace sql_interface_net_wpf
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            up.connect(txt_database_ip.Text, txt_database_name.Text, txt_database_user_id.Text, psw_user_database_password.Password);
+            db.connect(txt_database_ip.Text, txt_database_name.Text, txt_database_user_id.Text, psw_user_database_password.Password);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            up.Query(txt_sql_command.Text);
+            db.Query(txt_sql_command.Text);
         }
 
         public void disable_buttons() {
@@ -56,5 +57,13 @@ namespace sql_interface_net_wpf
             btn_connect.IsEnabled = true;
             btn_disconnect.IsEnabled = false;
         }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            ConfRead read = new ConfRead();
+            read.readConnConfig();
+            db.connect();
+        }
+
     }
 }

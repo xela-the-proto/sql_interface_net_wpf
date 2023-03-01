@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using Mysqlx;
+using sql_interface_net_wpf.Config;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -14,6 +15,7 @@ namespace sql_interface_net_wpf.DB
     {
         private string conn_string;
         MySqlConnection conn = new MySqlConnection();
+        ConfRead config = new ConfRead();
         
         public QueryDb()
         {
@@ -45,7 +47,7 @@ namespace sql_interface_net_wpf.DB
         {
             try
             {
-                DataTable table = conn.GetSchema()
+                DataTable table = conn.GetSchema();
                 
             }
             catch (MySqlException e)
@@ -58,7 +60,7 @@ namespace sql_interface_net_wpf.DB
         {
             try
             {
-
+                
                 conn.ConnectionString = "server=" + ip + ";user id=" + user_id
                     + ";password=" + user_password + ";database=" + db_name + ";";
                 conn.Open();
@@ -69,6 +71,30 @@ namespace sql_interface_net_wpf.DB
             catch (MySqlException e)
             {
                 MessageBox.Show(e.Message,"Error!",MessageBoxButton.OK,MessageBoxImage.Error);
+            }
+        }
+
+        public void connect()
+        {
+            try
+            {
+                string ip, id, pass, name;
+                ip = config.getIp();
+                id = config.getId();
+                pass = config.getPass();
+                name = config.getName();
+
+                conn.ConnectionString = "server=" + ip + ";user id=" + id
+                    + ";password=" + pass + ";database=" + name + ";";
+                MessageBox.Show(conn.ConnectionString.ToString());
+                conn.Open();
+
+                MainWindow mainWindow = new MainWindow();
+                mainWindow.disable_buttons();
+            }
+            catch (MySqlException e)
+            {
+                MessageBox.Show(e.Message, "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
