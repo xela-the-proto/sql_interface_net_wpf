@@ -60,8 +60,6 @@ namespace sql_interface_net_wpf
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            ConfRead read = new ConfRead();
-            read.readConnConfig();
             db.connect();
         }
 

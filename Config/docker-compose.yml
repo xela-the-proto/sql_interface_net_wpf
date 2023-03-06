@@ -1,0 +1,43 @@
+services:
+    proxy:
+        image: traefik:latest
+        restart: always
+        command: --api.insecure=true --providers.docker
+        ports:
+            - 80:80
+            - 8080:8080
+        volumes:
+            # So that Traefik can listen to the Docker events
+            - /var/run/docker.sock:/var/run/docker.sock
+        networks:
+            - internal
+    phpmyadmin:
+        image: phpmyadmin
+        restart: always
+        environment:
+            - PMA_HOST=db
+        labels:
+            - "traefik.http.routers.php.rule=Host(`pma.docker.localhost`)"
+        networks:
+            - internal
+    db:
+        image: mariadb:latest
+        restart: always
+        ports:
+            - 3306:3306
+        secrets:
+            - db-password
+        volumes:
+            - db-data:/var/lib/mysql
+        environment:
+            - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/db-password
+        networks:
+            - internal
+networks:
+    internal:
+        driver: bridge
+secrets:
+    db-password:
+        file: ./password.txt
+volumes:
+    db-data:
