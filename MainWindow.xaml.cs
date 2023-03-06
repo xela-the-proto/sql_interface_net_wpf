@@ -1,5 +1,4 @@
-﻿using sql_interface_net_wpf.Config;
-using sql_interface_net_wpf.DB;
+﻿using sql_interface_net_wpf.DB;
 using System;
 using System.Collections.Generic;
 using System.Linq;

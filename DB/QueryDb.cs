@@ -1,7 +1,6 @@
 ﻿using Microsoft.Win32;
 using MySql.Data.MySqlClient;
 using Mysqlx;
-using sql_interface_net_wpf.Config;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -24,7 +23,6 @@ namespace sql_interface_net_wpf.DB
         private string debug_msgbox_text;
         private string conn_string;
         MySqlConnection conn = new MySqlConnection();
-        ConfRead config = new ConfRead();
         
         public QueryDb()
         {
