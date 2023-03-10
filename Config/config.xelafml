@@ -3,7 +3,7 @@
 	<dbip ip = "127.0.0.1"/>
 	<userid id = "root"/>
 	<userpassword password = "root"/>
-	<dbname name = "xela"/>
+	<dbname name = "Medicina"/>
 	<debugtxtbox debug = "true"/>
 	<dns dnssrv = "false"/>
 </configuration>

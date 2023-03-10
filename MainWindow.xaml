@@ -28,7 +28,7 @@
         <Button x:Name="btn_disconnect" Content="Disconnect" HorizontalAlignment="Left" Margin="79,150,0,0" VerticalAlignment="Top" Height="19" Width="70"/>
         <TextBox x:Name="txt_sql_command" HorizontalAlignment="Left" Margin="380,27,0,0" VerticalAlignment="Top" Width="295" TextWrapping="WrapWithOverflow" Height="111"/>
         <Button Margin="250,56,0,0" Click="Button_Click_2" Content="Open" Height="19" VerticalAlignment="Top" HorizontalAlignment="Left" Width="75"/>
-        <Label Content="Or open a .xla file" Margin="235,21,0,0" Height="27" VerticalAlignment="Top" HorizontalAlignment="Left" Width="125"/>
+        <Label Content="Or open a .xlafml file" Margin="235,21,0,0" Height="27" VerticalAlignment="Top" HorizontalAlignment="Left" Width="125"/>
 
     </Grid>
 </Window>

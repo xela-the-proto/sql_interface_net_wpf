@@ -19,7 +19,8 @@ namespace sql_interface_net_wpf.DB
         private string debug_msgbox_text;
         private string conn_string;
         MySqlConnection conn = new MySqlConnection();
-        
+        MySqlCommand comm = new MySqlCommand();
+
         public QueryDb()
         {
             conn_string = string.Empty;
@@ -30,14 +31,31 @@ namespace sql_interface_net_wpf.DB
             this.conn_string = conn_string;
         }
 
-        public void Query(string command)
+        public async void QueryParse(string command)
         {
             try
             {
-                MySqlCommand comm = new MySqlCommand();
+                
                 comm.CommandText = command;
                 comm.Connection = conn;
-                comm.ExecuteNonQuery();
+                //TODO:pefect query
+                if (command.Contains("SELECT"))
+                {
+                    using var reader = comm.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        for (int i = 0; i < reader.FieldCount; i++)
+                        {
+                            MessageBox.Show(reader.GetValue(i).ToString());
+                        }
+                        
+                    }
+
+                }
+                else 
+                { 
+                    comm.ExecuteNonQuery(); 
+                }
 
             }
             catch (MySqlException e)
@@ -63,7 +81,6 @@ namespace sql_interface_net_wpf.DB
         {
             try
             {
-                readConnConfig();
                 conn.ConnectionString = "server=" + ip + ";user id=" + user_id
                     + ";password=" + user_password + ";database=" + db_name + ";";
                 conn.Open();
@@ -92,12 +109,6 @@ namespace sql_interface_net_wpf.DB
                     conn.ConnectionString = "server=" + db_ip + ";user id=" + user_id
                     + ";password=" + user_password + ";database=" + db_name + ";";
                 }
-
-                /*
-                MessageBox.Show("server=" + db_ip + ";user id=" + user_id
-                    + ";password=" + user_password + ";database=" +db_name + ";","Debug");
-                */
-                //TODO: fix 'Object cannot be cast from DBNull to other types.' when connecting to server
                 conn.Open();
 
                 MainWindow mainWindow = new MainWindow();

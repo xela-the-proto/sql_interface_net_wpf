@@ -24,7 +24,7 @@ namespace sql_interface_net_wpf
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            db.Query(txt_sql_command.Text);
+            db.QueryParse(txt_sql_command.Text);
         }
 
         public void disable_buttons() {
