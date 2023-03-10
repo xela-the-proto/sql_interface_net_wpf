@@ -5,4 +5,5 @@
 	<userpassword password = "root"/>
 	<dbname name = "xela"/>
 	<debugtxtbox debug = "true"/>
+	<dns dnssrv = "false"/>
 </configuration>

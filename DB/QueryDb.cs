@@ -1,13 +1,7 @@
 ﻿using Microsoft.Win32;
-using MySql.Data.MySqlClient;
-using Mysqlx;
+using MySqlConnector;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Xml.Linq;
 
@@ -19,7 +13,9 @@ namespace sql_interface_net_wpf.DB
         private string db_name;
         private string user_id;
         private string user_password;
-        private bool debug_msgbox; 
+        private string dns_text = "";
+        private bool debug_msgbox;
+        private bool dns;
         private string debug_msgbox_text;
         private string conn_string;
         MySqlConnection conn = new MySqlConnection();
@@ -83,12 +79,24 @@ namespace sql_interface_net_wpf.DB
         {
             try
             {
+
                 readConnConfig();
 
-                conn.ConnectionString = "server=" + db_ip +  ";uid=" + user_id
+                if (dns)
+                {
+                    conn.ConnectionString = "server=_mysql._tcp." + db_ip + ";dns-srv=true; uid=" + user_id
                     + ";pwd=" + user_password + ";database=" + db_name + ";";
+                }
+                else if (!dns)
+                {
+                    conn.ConnectionString = "server=" + db_ip + ";user id=" + user_id
+                    + ";password=" + user_password + ";database=" + db_name + ";";
+                }
+
+                /*
                 MessageBox.Show("server=" + db_ip + ";user id=" + user_id
                     + ";password=" + user_password + ";database=" +db_name + ";","Debug");
+                */
                 //TODO: fix 'Object cannot be cast from DBNull to other types.' when connecting to server
                 conn.Open();
 
@@ -137,6 +145,15 @@ namespace sql_interface_net_wpf.DB
                 {
                     debug_msgbox = true;
                 }
+                else dns = false;
+            }
+            foreach(var dns in reader.Descendants("dns"))
+            {
+                if (dns_text.ToLower() == "true")
+                {
+                    this.dns = true;
+                }
+                else this.dns = false;
             }
             if (debug_msgbox)
             {

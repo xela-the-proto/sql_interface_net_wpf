@@ -8,12 +8,12 @@
     <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="MySql.EntityFrameworkCore" Version="7.0.0" />
-  </ItemGroup>
-
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
     <Exec Command="docker compose -f &quot;C:\Users\thega\source\repos\sql_interface_net_wpf\Config\docker-compose.yml&quot; up -d" />
   </Target>
+
+  <ItemGroup>
+    <PackageReference Include="MySqlConnector" Version="2.2.5" />
+  </ItemGroup>
 
 </Project>
