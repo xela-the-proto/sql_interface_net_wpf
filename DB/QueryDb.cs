@@ -1,8 +1,12 @@
-﻿using Microsoft.Win32;
+﻿using Microsoft.VisualBasic;
+using Microsoft.Win32;
 using MySqlConnector;
 using System;
 using System.Data;
+using System.Linq;
+using System.Transactions;
 using System.Windows;
+using System.Windows.Documents;
 using System.Xml.Linq;
 
 namespace sql_interface_net_wpf.DB
@@ -38,23 +42,33 @@ namespace sql_interface_net_wpf.DB
                 
                 comm.CommandText = command;
                 comm.Connection = conn;
-                //TODO:pefect query
+                //TODO:pefect query messages
                 if (command.Contains("SELECT"))
                 {
                     using var reader = comm.ExecuteReader();
                     while (reader.Read())
                     {
+                        string values;
+                        string?[] values_array = new string[reader.FieldCount];
+                        
                         for (int i = 0; i < reader.FieldCount; i++)
                         {
-                            MessageBox.Show(reader.GetValue(i).ToString());
+                            values_array[i] = reader.GetValue(i).ToString();
                         }
-                        
-                    }
 
+                        values = string.Join("      ", values_array);
+
+                        MessageBox.Show("Query results\n" + values, "Query", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    if (!reader.HasRows)
+                    {
+                        MessageBox.Show("No rows found that matched the query", "Query warning", MessageBoxButton.OK, MessageBoxImage.Hand);
+                    }
                 }
                 else 
-                { 
-                    comm.ExecuteNonQuery(); 
+                {
+                    int rows = comm.ExecuteNonQuery();
+                    MessageBox.Show("Done! " + rows + " rows have been affected!", "Query", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
 
             }
@@ -101,7 +115,7 @@ namespace sql_interface_net_wpf.DB
 
                 if (dns)
                 {
-                    conn.ConnectionString = "server=_mysql._tcp." + db_ip + ";dns-srv=true; uid=" + user_id
+                    conn.ConnectionString = "server=" + db_ip + ";dns-srv=true; uid=" + user_id
                     + ";pwd=" + user_password + ";database=" + db_name + ";";
                 }
                 else if (!dns)
