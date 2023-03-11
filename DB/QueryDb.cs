@@ -39,7 +39,6 @@ namespace sql_interface_net_wpf.DB
         {
             try
             {
-                
                 comm.CommandText = command;
                 comm.Connection = conn;
                 //TODO:pefect query messages
@@ -62,7 +61,7 @@ namespace sql_interface_net_wpf.DB
                     }
                     if (!reader.HasRows)
                     {
-                        MessageBox.Show("No rows found that matched the query", "Query warning", MessageBoxButton.OK, MessageBoxImage.Hand);
+                        MessageBox.Show("No rows found that matched the query", "Query", MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
                 }
                 else 
@@ -75,6 +74,13 @@ namespace sql_interface_net_wpf.DB
             catch (MySqlException e)
             {
                 MessageBox.Show(e.Message);
+            }
+            catch(System.InvalidOperationException e)
+            {
+                if (e.Message.Contains("CommandText must be specified"))
+                {
+                    MessageBox.Show("Missing mysql comamnd!","Query",MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
 
