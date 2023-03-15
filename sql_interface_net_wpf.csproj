@@ -13,13 +13,18 @@
   </Target>
 
   <ItemGroup>
+    <Compile Remove="testdb\**" />
     <Compile Remove="Utilities\**" />
+    <EmbeddedResource Remove="testdb\**" />
     <EmbeddedResource Remove="Utilities\**" />
+    <None Remove="testdb\**" />
     <None Remove="Utilities\**" />
+    <Page Remove="testdb\**" />
     <Page Remove="Utilities\**" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Loading_icon.gif" />
     <None Remove="man.jpg" />
   </ItemGroup>
 
@@ -28,6 +33,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Loading_icon.gif" />
     <Resource Include="Res\man.jpg" />
   </ItemGroup>
 

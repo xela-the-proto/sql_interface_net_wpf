@@ -7,7 +7,6 @@
         mc:Ignorable="d"
         Title="Loading" Height="90" Width="399">
     <Grid>
-        <Label Content="Porcamadonna" HorizontalAlignment="Left" Margin="36,0,0,0" VerticalAlignment="Center" Width="322"/>
-
+        <Image Margin="25,0,214,1" Source="/Loading_icon.gif"/>
     </Grid>
 </Window>

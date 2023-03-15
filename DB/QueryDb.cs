@@ -44,7 +44,7 @@ namespace sql_interface_net_wpf.DB
                 IProgress<int> progress = new Progress<int>();
                 comm.CommandText = command;
                 comm.Connection = conn;
-                //TODO:pefect query messages
+                //TODO:perfect query messages
                 await QueryParse(comm);
             }
             catch (MySqlException e)
@@ -64,13 +64,12 @@ namespace sql_interface_net_wpf.DB
         private async Task QueryParse(MySqlCommand command)
         {
             int totalCount = command.Parameters.Count;
-            
+            string total_query = "";
             if (command.CommandText.Contains("SELECT"))
             {
                 using var reader = comm.ExecuteReader();
                 while (reader.Read())
                 {
-                    processing_window_open();
                     string values;
                     string?[] values_array = new string[reader.FieldCount];
 
@@ -79,12 +78,13 @@ namespace sql_interface_net_wpf.DB
                         values_array[i] = reader.GetValue(i).ToString();
                     }
 
-                    values = string.Join("      ", values_array);
+                    values = string.Join("          ", values_array);
 
-                    processing_window_close();
 
-                    MessageBox.Show("Query results\n" + values, "Query", MessageBoxButton.OK, MessageBoxImage.Information);
+                    total_query = total_query + values;
                 }
+                //TODO: for big queries messageboxes are shit
+                 MessageBox.Show("Query results\n" + total_query, "Query", MessageBoxButton.OK, MessageBoxImage.Information);
                 if (!reader.HasRows)
                 {
                     MessageBox.Show("No rows found that matched the query", "Query", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -97,6 +97,7 @@ namespace sql_interface_net_wpf.DB
             }
         }
 
+        //TODO: handle a loading page
         private void processing_window_open()
         {
             loading_widnow.Show();
@@ -118,6 +119,8 @@ namespace sql_interface_net_wpf.DB
                 MessageBox.Show(e.Message);
             }
         }
+
+        //TODO: move methods below to tidy up stuff
 
         public void connect(string ip,string db_name,string user_id,string user_password)
         {
