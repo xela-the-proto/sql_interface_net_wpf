@@ -3,7 +3,6 @@
 	<dbip ip = "127.0.0.1"/>
 	<userid id = "root"/>
 	<userpassword password = "root"/>
-	<dbname name = "xela"/>
-	<debugtxtbox debug = "false"/>
-	<dns dnssrv = "false"/>
+	<dbname name = "testdata"/>
+	<debugtxtbox debug = "true"/>
 </configuration>

@@ -26,7 +26,7 @@ namespace sql_interface_net_wpf
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            db.QueryParse(txt_sql_command.Text);
+            db.Query(txt_sql_command.Text);
         }
 
         public void disable_buttons() {
@@ -61,8 +61,7 @@ namespace sql_interface_net_wpf
             db.disconnect();
         }
 
-     
-        //only way to kill it all the way through else it would go to background
+
         private void Window_Closed(object sender, EventArgs e)
         {
             Application.Current.Shutdown();

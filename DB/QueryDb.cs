@@ -4,6 +4,7 @@ using MySqlConnector;
 using System;
 using System.Data;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Transactions;
 using System.Windows;
 using System.Windows.Documents;
@@ -24,6 +25,7 @@ namespace sql_interface_net_wpf.DB
         private string conn_string;
         MySqlConnection conn = new MySqlConnection();
         MySqlCommand comm = new MySqlCommand();
+        loading loading_widnow = new loading();
 
         public QueryDb()
         {
@@ -35,41 +37,15 @@ namespace sql_interface_net_wpf.DB
             this.conn_string = conn_string;
         }
 
-        public async void QueryParse(string command)
+        public async void Query(string command)
         {
             try
             {
+                IProgress<int> progress = new Progress<int>();
                 comm.CommandText = command;
                 comm.Connection = conn;
                 //TODO:pefect query messages
-                if (command.Contains("SELECT"))
-                {
-                    using var reader = comm.ExecuteReader();
-                    while (reader.Read())
-                    {
-                        string values;
-                        string?[] values_array = new string[reader.FieldCount];
-                        
-                        for (int i = 0; i < reader.FieldCount; i++)
-                        {
-                            values_array[i] = reader.GetValue(i).ToString();
-                        }
-
-                        values = string.Join("      ", values_array);
-
-                        MessageBox.Show("Query results\n" + values, "Query", MessageBoxButton.OK, MessageBoxImage.Information);
-                    }
-                    if (!reader.HasRows)
-                    {
-                        MessageBox.Show("No rows found that matched the query", "Query", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    }
-                }
-                else 
-                {
-                    int rows = comm.ExecuteNonQuery();
-                    MessageBox.Show("Done! " + rows + " rows have been affected!", "Query", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-
+                await QueryParse(comm);
             }
             catch (MySqlException e)
             {
@@ -83,7 +59,53 @@ namespace sql_interface_net_wpf.DB
                 }
             }
         }
+        
 
+        private async Task QueryParse(MySqlCommand command)
+        {
+            int totalCount = command.Parameters.Count;
+            
+            if (command.CommandText.Contains("SELECT"))
+            {
+                using var reader = comm.ExecuteReader();
+                while (reader.Read())
+                {
+                    processing_window_open();
+                    string values;
+                    string?[] values_array = new string[reader.FieldCount];
+
+                    for (int i = 0; i < reader.FieldCount; i++)
+                    {
+                        values_array[i] = reader.GetValue(i).ToString();
+                    }
+
+                    values = string.Join("      ", values_array);
+
+                    processing_window_close();
+
+                    MessageBox.Show("Query results\n" + values, "Query", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                if (!reader.HasRows)
+                {
+                    MessageBox.Show("No rows found that matched the query", "Query", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+            }
+            else
+            {
+                int rows = comm.ExecuteNonQuery();
+                MessageBox.Show("Done! " + rows + " rows have been affected!", "Query", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
+        private void processing_window_open()
+        {
+            loading_widnow.Show();
+        }
+
+        private void processing_window_close()
+        {
+            loading_widnow.Hide();
+        }
         public void SaveTable(string command,string collection)
         {
             try
@@ -150,7 +172,7 @@ namespace sql_interface_net_wpf.DB
         public void readConnConfig()
         {
             OpenFileDialog file_open = new OpenFileDialog();
-            file_open.Filter = "xelafml (*.xelafml)| *.xelafml";
+            file_open.Filter = "xlafml (*.xlafml)| *.xlafml";
             file_open.ShowDialog();
             XDocument reader = XDocument.Load(file_open.FileName);
             foreach (var ip in reader.Descendants("dbip"))

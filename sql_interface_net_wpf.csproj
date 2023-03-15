@@ -13,16 +13,14 @@
   </Target>
 
   <ItemGroup>
-    <None Remove="man.jpg" />
+    <Compile Remove="Utilities\**" />
+    <EmbeddedResource Remove="Utilities\**" />
+    <None Remove="Utilities\**" />
+    <Page Remove="Utilities\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <COMReference Include="{215d64d2-031c-33c7-96e3-61794cd1ee61}">
-      <WrapperTool>tlbimp</WrapperTool>
-      <VersionMinor>4</VersionMinor>
-      <VersionMajor>2</VersionMajor>
-      <Guid>215d64d2-031c-33c7-96e3-61794cd1ee61</Guid>
-    </COMReference>
+    <None Remove="man.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,11 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="man.jpg" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Utilities\" />
+    <Resource Include="Res\man.jpg" />
   </ItemGroup>
 
 </Project>
