@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:sql_interface_net_wpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="210" Width="695" Icon="/Res/man.jpg" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Closed="Window_Closed">
+        Title="MainWindow" Height="370" Width="695" Icon="/Res/man.jpg" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Closed="Window_Closed">
     <Grid RenderTransformOrigin="0.5,0.5">
         <Button Content="Execute Query" Margin="381,141,0,0" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="295" Click="Button_Click"/>
         <TextBox x:Name="txt_database_ip" HorizontalAlignment="Left" Margin="95,22,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="20" Width="76"><Run Language="it-it" Text="Database Ip"/><LineBreak/><Run Language="it-it"/></TextBlock>
         <TextBox x:Name="txt_database_name" HorizontalAlignment="Left" Margin="95,53,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18"/>
         <TextBlock HorizontalAlignment="Left" Margin="11,51,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="20" Width="76"><Run Language="it-it" Text="Database"/><LineBreak/><Run Language="it-it"/></TextBlock>
-        <TextBox x:Name="txt_database_user_id" HorizontalAlignment="Left" Margin="95,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="120" Height="18"/>
+        <TextBox x:Name="txt_database_user_id" HorizontalAlignment="Left" Margin="95,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="20" Width="76"><Run Language="it-it" Text="User id"/></TextBlock>
         <TextBlock HorizontalAlignment="Left" Margin="7,119,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="20" Width="76"><Run Language="it-it" Text="Password"/></TextBlock>
         <Button x:Name="btn_connect" Content="Connect" HorizontalAlignment="Left" Margin="8,150,0,0" VerticalAlignment="Top" Height="19" Width="50" Click="Button_Click_1"/>
@@ -21,6 +21,6 @@
         <TextBox x:Name="txt_sql_command" HorizontalAlignment="Left" Margin="380,27,0,0" VerticalAlignment="Top" Width="295" TextWrapping="WrapWithOverflow" Height="111"/>
         <Button Margin="250,56,0,0" Click="Button_Click_2" Content="Open" Height="19" VerticalAlignment="Top" HorizontalAlignment="Left" Width="75"/>
         <Label Content="Or open a .xlafml file" Margin="235,21,0,0" Height="27" VerticalAlignment="Top" HorizontalAlignment="Left" Width="125"/>
-
+        <DataGrid x:Name="query_data_grid" Margin="0,177,0,0" AutoGenerateColumns="False"/>
     </Grid>
 </Window>

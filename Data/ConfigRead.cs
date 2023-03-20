@@ -1,0 +1,75 @@
+﻿using Microsoft.Win32;
+using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Linq;
+using System.Net;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Xml.Linq;
+
+namespace xelas_not_so_convenient_mysql_interface.Data
+{
+    internal class ConfigRead
+    {
+        private string db_ip;
+        private string db_name;
+        private string user_id;
+        private string user_password;
+        private string dns_text = "";
+        private bool debug_msgbox;
+        private bool dns;
+        private string debug_msgbox_text;
+        private string conn_string;
+        public void readConnConfig()
+        {
+            OpenFileDialog file_open = new OpenFileDialog();
+            file_open.Filter = "xlafml (*.xlafml)| *.xlafml";
+            file_open.ShowDialog();
+            XDocument reader = XDocument.Load(file_open.FileName);
+            foreach (var ip in reader.Descendants("dbip"))
+            {
+                db_ip = (string)ip.Attribute("ip");
+            }
+            foreach (var id in reader.Descendants("userid"))
+            {
+                user_id = (string)id.Attribute("id");
+            }
+            foreach (var password in reader.Descendants("userpassword"))
+            {
+                user_password = (string)password.Attribute("password");
+            }
+            foreach (var name in reader.Descendants("dbname"))
+            {
+                db_name = (string)name.Attribute("name");
+            }
+            foreach (var debug_box in reader.Descendants("debugtxtbox"))
+            {
+                debug_msgbox_text = (string)debug_box.Attribute("debug");
+                if (debug_msgbox_text.ToLower() == "true")
+                {
+                    debug_msgbox = true;
+                }
+                else dns = false;
+            }
+            foreach (var dns in reader.Descendants("dns"))
+            {
+                if (dns_text.ToLower() == "true")
+                {
+                    this.dns = true;
+                }
+                else this.dns = false;
+            }
+            if (debug_msgbox)
+            {
+                MessageBox.Show(db_ip + " " + db_name + " " + user_id + " " + user_password, "debug");
+            }
+        }
+
+        public string getConnString()
+        {
+            return "server=" + db_ip + ";user id=" + user_id + ";password=" + user_password + ";database=" + db_name + ";";
+        }
+    }
+}

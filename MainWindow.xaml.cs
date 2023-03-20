@@ -2,7 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Windows;
-
+using xelas_not_so_convenient_mysql_interface.Data;
+using xelas_not_so_convenient_mysql_interface.DB;
 
 namespace sql_interface_net_wpf
 {
@@ -12,7 +13,9 @@ namespace sql_interface_net_wpf
     public partial class MainWindow : Window
     {
        
-        QueryDb db = new QueryDb();
+        ConnectionManager connectionManager = new ConnectionManager();
+        ConfigRead configRead = new ConfigRead();
+        QueryManager queryDb = new QueryManager();
         public MainWindow()
         {
             InitializeComponent();
@@ -21,12 +24,12 @@ namespace sql_interface_net_wpf
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             disable_buttons();
-            db.connect(txt_database_ip.Text, txt_database_name.Text, txt_database_user_id.Text, psw_user_database_password.Password);
+            connectionManager.connect(txt_database_ip.Text, txt_database_name.Text, txt_database_user_id.Text, psw_user_database_password.Password);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            db.Query(txt_sql_command.Text);
+            queryDb.Query(txt_sql_command.Text,connectionManager);
         }
 
         public void disable_buttons() {
@@ -52,13 +55,14 @@ namespace sql_interface_net_wpf
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             disable_buttons();
-            db.connect();
+            configRead.readConnConfig();
+            connectionManager.connect(configRead.getConnString());
         }
 
         private void btn_disconnect_Click(object sender, RoutedEventArgs e)
         {
             enable_buttons();
-            db.disconnect();
+            connectionManager.disconnect();
         }
 
 

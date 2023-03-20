@@ -24,7 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Loading_icon.gif" />
     <None Remove="man.jpg" />
   </ItemGroup>
 
@@ -33,7 +32,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Loading_icon.gif" />
     <Resource Include="Res\man.jpg" />
   </ItemGroup>
 
