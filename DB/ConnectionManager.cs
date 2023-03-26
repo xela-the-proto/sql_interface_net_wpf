@@ -29,6 +29,13 @@ namespace xelas_not_so_convenient_mysql_interface.DB
             {
                 MessageBox.Show(e.Message, "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            catch (InvalidOperationException e)
+            {
+                if (e.ToString().Contains("Cannot change the connection string on an open connection."))
+                {
+                    MessageBox.Show("cannot change connection whilst one is open!", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
 
         public void connect(string conn_string)
@@ -43,6 +50,13 @@ namespace xelas_not_so_convenient_mysql_interface.DB
             catch (MySqlException e)
             {
                 MessageBox.Show(e.Message, "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (InvalidOperationException e)
+            {
+                if (e.ToString().Contains("Cannot change the connection string on an open connection."))
+                {
+                    MessageBox.Show("cannot change connection whilst one is open!", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
 

@@ -24,47 +24,58 @@ namespace xelas_not_so_convenient_mysql_interface.Data
         private string conn_string;
         public void readConnConfig()
         {
-            OpenFileDialog file_open = new OpenFileDialog();
-            file_open.Filter = "xlafml (*.xlafml)| *.xlafml";
-            file_open.ShowDialog();
-            XDocument reader = XDocument.Load(file_open.FileName);
-            foreach (var ip in reader.Descendants("dbip"))
+            try
             {
-                db_ip = (string)ip.Attribute("ip");
-            }
-            foreach (var id in reader.Descendants("userid"))
-            {
-                user_id = (string)id.Attribute("id");
-            }
-            foreach (var password in reader.Descendants("userpassword"))
-            {
-                user_password = (string)password.Attribute("password");
-            }
-            foreach (var name in reader.Descendants("dbname"))
-            {
-                db_name = (string)name.Attribute("name");
-            }
-            foreach (var debug_box in reader.Descendants("debugtxtbox"))
-            {
-                debug_msgbox_text = (string)debug_box.Attribute("debug");
-                if (debug_msgbox_text.ToLower() == "true")
+                OpenFileDialog file_open = new OpenFileDialog();
+                file_open.Filter = "xlafml (*.xlafml)| *.xlafml";
+                file_open.ShowDialog();
+                XDocument reader = XDocument.Load(file_open.FileName);
+                foreach (var ip in reader.Descendants("dbip"))
                 {
-                    debug_msgbox = true;
+                    db_ip = (string)ip.Attribute("ip");
                 }
-                else dns = false;
-            }
-            foreach (var dns in reader.Descendants("dns"))
-            {
-                if (dns_text.ToLower() == "true")
+                foreach (var id in reader.Descendants("userid"))
                 {
-                    this.dns = true;
+                    user_id = (string)id.Attribute("id");
                 }
-                else this.dns = false;
+                foreach (var password in reader.Descendants("userpassword"))
+                {
+                    user_password = (string)password.Attribute("password");
+                }
+                foreach (var name in reader.Descendants("dbname"))
+                {
+                    db_name = (string)name.Attribute("name");
+                }
+                foreach (var debug_box in reader.Descendants("debugtxtbox"))
+                {
+                    debug_msgbox_text = (string)debug_box.Attribute("debug");
+                    if (debug_msgbox_text.ToLower() == "true")
+                    {
+                        debug_msgbox = true;
+                    }
+                    else dns = false;
+                }
+                foreach (var dns in reader.Descendants("dns"))
+                {
+                    if (dns_text.ToLower() == "true")
+                    {
+                        this.dns = true;
+                    }
+                    else this.dns = false;
+                }
+                if (debug_msgbox)
+                {
+                    MessageBox.Show(db_ip + " " + db_name + " " + user_id + " " + user_password, "debug");
+                }
             }
-            if (debug_msgbox)
+            catch (ArgumentException e)
             {
-                MessageBox.Show(db_ip + " " + db_name + " " + user_id + " " + user_password, "debug");
+                if (e.ToString().Contains("The string was not recognized as a valid Uri"))
+                {
+                    MessageBox.Show("no file was selected!", "Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
             }
+            
         }
 
         public string getConnString()

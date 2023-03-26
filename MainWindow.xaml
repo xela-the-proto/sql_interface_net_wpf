@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:sql_interface_net_wpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="370" Width="695" Icon="/Res/man.jpg" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Closed="Window_Closed">
+        Title="MainWindow" Height="575" Width="905" Icon="/Res/man.jpg" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Closed="Window_Closed">
     <Grid RenderTransformOrigin="0.5,0.5">
-        <Button Content="Execute Query" Margin="381,141,0,0" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="295" Click="Button_Click"/>
+        <Button Content="Execute Query" Margin="605,145,0,0" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="295" Click="Button_Click"/>
         <TextBox x:Name="txt_database_ip" HorizontalAlignment="Left" Margin="95,22,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="20" Width="76"><Run Language="it-it" Text="Database Ip"/><LineBreak/><Run Language="it-it"/></TextBlock>
         <TextBox x:Name="txt_database_name" HorizontalAlignment="Left" Margin="95,53,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18"/>
@@ -16,11 +16,12 @@
         <TextBlock HorizontalAlignment="Left" Margin="10,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="20" Width="76"><Run Language="it-it" Text="User id"/></TextBlock>
         <TextBlock HorizontalAlignment="Left" Margin="7,119,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="20" Width="76"><Run Language="it-it" Text="Password"/></TextBlock>
         <Button x:Name="btn_connect" Content="Connect" HorizontalAlignment="Left" Margin="8,150,0,0" VerticalAlignment="Top" Height="19" Width="50" Click="Button_Click_1"/>
-        <PasswordBox x:Name="psw_user_database_password" Margin="94,119,0,0" Width="120" Height="18" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <PasswordBox x:Name="psw_user_database_password" Margin="94,119,0,0" Width="120" Height="18" VerticalAlignment="Top" HorizontalAlignment="Left" d:IsLocked="True"/>
         <Button x:Name="btn_disconnect" Content="Disconnect" HorizontalAlignment="Left" Margin="79,150,0,0" VerticalAlignment="Top" Height="19" Width="70" Click="btn_disconnect_Click"/>
-        <TextBox x:Name="txt_sql_command" HorizontalAlignment="Left" Margin="380,27,0,0" VerticalAlignment="Top" Width="295" TextWrapping="WrapWithOverflow" Height="111"/>
-        <Button Margin="250,56,0,0" Click="Button_Click_2" Content="Open" Height="19" VerticalAlignment="Top" HorizontalAlignment="Left" Width="75"/>
-        <Label Content="Or open a .xlafml file" Margin="235,21,0,0" Height="27" VerticalAlignment="Top" HorizontalAlignment="Left" Width="125"/>
-        <DataGrid x:Name="query_data_grid" Margin="0,177,0,0" AutoGenerateColumns="False"/>
+        <TextBox x:Name="txt_sql_command" HorizontalAlignment="Left" Margin="605,22,0,0" VerticalAlignment="Top" Width="295" TextWrapping="WrapWithOverflow" Height="111"/>
+        <Button Margin="377,58,447,0" Click="Button_Click_2" Content="Open" Height="20" VerticalAlignment="Top"/>
+        <Label Content="Or open a .xlafml file" Margin="353,22,420,0" Height="27" VerticalAlignment="Top"/>
+        <DataGrid x:Name="query_data_grid" x:FieldModifier="public" Margin="0,189,0,0" AutoGenerateColumns="True"/>
+        <ProgressBar x:Name="query_progress" Margin="605,170,10,375" IsIndeterminate="True"/>
     </Grid>
 </Window>

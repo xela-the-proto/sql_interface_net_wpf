@@ -33,21 +33,15 @@ namespace sql_interface_net_wpf.DB
         PopulateGrid populate = new PopulateGrid();
         public QueryManager()
         {
-            conn_string = string.Empty;
+
         }
 
-        public QueryManager(string conn_string)
-        {
-            this.conn_string = conn_string;
-        }
 
         public void Query(string command, ConnectionManager conn_manager)
         {
-            MainWindow window = new MainWindow();
-            int j = 0;
+            MainWindow window = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
             try
             {
-                conn = conn_manager.getConnection();
                 comm.CommandText = command;
                 comm.Connection = conn_manager.getConnection();
                 //TODO:perfect query messages
@@ -55,39 +49,9 @@ namespace sql_interface_net_wpf.DB
                 string total_query = "";
                 if (comm.CommandText.Contains("SELECT"))
                 {
-                    using var reader = comm.ExecuteReader();
-                    schema = reader.GetSchemaTable();
-                    populate.populateColumns(schema);
-                    foreach (DataRow row in schema.Rows)
-                    {
-                        /*
-                        DataGridTextColumn textColumn = new DataGridTextColumn();
-                        Binding b = new Binding(row.Field<string>("ColumnName"));
-                        textColumn.Binding = b;
-                        textColumn.Header = row.Field<string>("ColumnName");
-                        */
-                        window.query_data_grid.Columns.Add(new DataGridTextColumn() { Binding = new Binding("ColumnName={"+ j +"}"), Header = row.Field<string>("ColumnName") });
-                    }
-                    while (reader.Read())
-                    {
-                        string values;
-                        string?[] values_array = new string[reader.FieldCount];
-
-                        for (int i = 0; i < reader.FieldCount; i++)
-                        {
-                            values_array[i] = reader.GetValue(i).ToString();
-                        }
-
-                        values = string.Join("          ", values_array);
-
-                        total_query = total_query + values;
-                    }
-                    //TODO: for big queries messageboxes are shit
-                    MessageBox.Show("Query results\n" + total_query, "Query", MessageBoxButton.OK, MessageBoxImage.Information);
-                    if (!reader.HasRows)
-                    {
-                        MessageBox.Show("No rows found that matched the query", "Query", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    }
+                    window.query_progress.IsEnabled  =true;
+                    populate.initPopulator(schema, conn_manager.getConnection(), comm);
+                    populate.populateColumns();
                 }
                 else
                 {

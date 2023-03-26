@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Controls;
 using xelas_not_so_convenient_mysql_interface.Data;
 using xelas_not_so_convenient_mysql_interface.DB;
 
