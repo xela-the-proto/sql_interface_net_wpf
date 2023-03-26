@@ -22,6 +22,7 @@
         <Button Margin="377,58,447,0" Click="Button_Click_2" Content="Open" Height="20" VerticalAlignment="Top"/>
         <Label Content="Or open a .xlafml file" Margin="353,22,420,0" Height="27" VerticalAlignment="Top"/>
         <DataGrid x:Name="query_data_grid" x:FieldModifier="public" Margin="0,189,0,0" AutoGenerateColumns="True"/>
-        <ProgressBar x:Name="query_progress" Margin="605,170,10,375" IsIndeterminate="True"/>
+        <ProgressBar x:Name="query_progress" Margin="605,170,0,375" IsIndeterminate="True" HorizontalAlignment="Left" Width="290"/>
+        <Button x:Name="dbg_button" Content="debug button" Margin="485,128,0,387" Click="Button_Click_3" HorizontalAlignment="Left" Width="85"/>
     </Grid>
 </Window>

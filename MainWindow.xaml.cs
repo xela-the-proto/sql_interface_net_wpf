@@ -71,5 +71,10 @@ namespace sql_interface_net_wpf
         {
             Application.Current.Shutdown();
         }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }

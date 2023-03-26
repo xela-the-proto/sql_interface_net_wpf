@@ -18,15 +18,6 @@ namespace sql_interface_net_wpf.DB
 {
     internal class QueryManager
     {
-        private string db_ip;
-        private string db_name;
-        private string user_id;
-        private string user_password;
-        private string dns_text = "";
-        private bool debug_msgbox;
-        private bool dns;
-        private string debug_msgbox_text;
-        private string conn_string;
         MySqlConnection conn = new MySqlConnection();
         MySqlCommand comm = new MySqlCommand();
         DataTable schema = new DataTable();
@@ -44,14 +35,15 @@ namespace sql_interface_net_wpf.DB
             {
                 comm.CommandText = command;
                 comm.Connection = conn_manager.getConnection();
-                //TODO:perfect query messages
+                //TODO:more support to other commands
                 int totalCount = comm.Parameters.Count;
                 string total_query = "";
                 if (comm.CommandText.Contains("SELECT"))
                 {
                     window.query_progress.IsEnabled  =true;
                     populate.initPopulator(schema, conn_manager.getConnection(), comm);
-                    populate.populateColumns();
+                    populate.populateGrid();
+
                 }
                 else
                 {
@@ -61,7 +53,7 @@ namespace sql_interface_net_wpf.DB
             }
             catch (MySqlException e)
             {
-                MessageBox.Show(e.Message);
+                MessageBox.Show(e.Message,"Error",MessageBoxButton.OK,MessageBoxImage.Error);
             }
             catch(InvalidOperationException e)
             {
@@ -113,18 +105,6 @@ namespace sql_interface_net_wpf.DB
             }
         }
 
-        //TODO: handle a loading page
-        /*
-        private void processing_window_open()
-        {
-            loading_widnow.Show();
-        }
-
-        private void processing_window_close()
-        {
-            loading_widnow.Hide();
-        }
-        */
         public void SaveTable(string command,string collection)
         {
             try
