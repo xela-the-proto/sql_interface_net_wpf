@@ -29,22 +29,26 @@ namespace xelas_not_so_convenient_mysql_interface.Data
             this.comm = comm;
         }
         
-        public async void populateGrid()
+        public void populateGrid()
         {
             MainWindow window = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+            int rows_Affected = 0;
             try
-            { 
-                comm.ExecuteNonQuery();
+            {
+                MessageBox.Show("!!ATTENTION!!\n After closing this box the program might hang for a while depending on the query size", "warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                rows_Affected = comm.ExecuteNonQuery();
                 MySqlDataAdapter sda = new MySqlDataAdapter(comm);
-                DataTable dt = new DataTable("Employee");
+                DataTable dt = new DataTable("Query_result");
                 sda.Fill(dt);
                 window.query_data_grid.ItemsSource = dt.DefaultView;
-                
             }
             catch (Exception ex)
             {
 
-            }
+            } finally {
+                MessageBox.Show("Done! Lines affected " + rows_Affected + "", "Query", MessageBoxButton.OK, MessageBoxImage.Question);
+                    
+             }
         }
     }
 }
