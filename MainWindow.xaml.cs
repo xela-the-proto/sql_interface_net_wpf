@@ -76,5 +76,11 @@ namespace sql_interface_net_wpf
         {
             
         }
+
+        private void btn_clear_datagrid_Click(object sender, RoutedEventArgs e)
+        {
+            query_data_grid.ItemsSource = null;
+            query_data_grid.Items.Refresh();
+        }
     }
 }

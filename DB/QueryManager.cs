@@ -4,6 +4,7 @@ using MySqlConnector;
 using System;
 using System.Data;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Transactions;
 using System.Windows;
@@ -42,7 +43,7 @@ namespace sql_interface_net_wpf.DB
                 {
                     window.query_progress.IsEnabled  =true;
                     populate.initPopulator(schema, conn_manager.getConnection(), comm);
-                    populate.populateGrid();
+                    new Thread(new ThreadStart(populate.populateGrid)).Start();
 
                 }
                 else
