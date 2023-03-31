@@ -38,13 +38,14 @@ namespace sql_interface_net_wpf.DB
                 comm.Connection = conn_manager.getConnection();
                 //TODO:more support to other commands
                 int totalCount = comm.Parameters.Count;
-                string total_query = "";
                 if (comm.CommandText.Contains("SELECT"))
                 {
                     window.query_progress.IsEnabled  =true;
                     populate.initPopulator(schema, conn_manager.getConnection(), comm);
-                    new Thread(new ThreadStart(populate.populateGrid)).Start();
-
+                    //might remove multithreadign all together
+                    Thread research_thread = new Thread(new ThreadStart(populate.populateGrid));
+                    research_thread.SetApartmentState(ApartmentState.MTA);
+                    research_thread.Start();
                 }
                 else
                 {
@@ -70,42 +71,7 @@ namespace sql_interface_net_wpf.DB
         }
         
 
-        private async Task QueryParse(MySqlCommand command)
-        {
-            int totalCount = command.Parameters.Count;
-            string total_query = "";
-            if (command.CommandText.Contains("SELECT"))
-            {
-                using var reader = comm.ExecuteReader();
-                while (reader.Read())
-                {
-                    string values;
-                    string?[] values_array = new string[reader.FieldCount];
-
-                    for (int i = 0; i < reader.FieldCount; i++)
-                    {
-                        values_array[i] = reader.GetValue(i).ToString();
-                    }
-
-                    values = string.Join("          ", values_array);
-
-
-                    total_query = total_query + values;
-                }
-                //TODO: for big queries messageboxes are shit
-                 MessageBox.Show("Query results\n" + total_query, "Query", MessageBoxButton.OK, MessageBoxImage.Information);
-                if (!reader.HasRows)
-                {
-                    MessageBox.Show("No rows found that matched the query", "Query", MessageBoxButton.OK, MessageBoxImage.Warning);
-                }
-            }
-            else
-            {
-                int rows = comm.ExecuteNonQuery();
-                MessageBox.Show("Done! " + rows + " rows have been affected!", "Query", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-        }
-
+        //this method is pretty stupid for large queries but idk might move it somewhere
         public void SaveTable(string command,string collection)
         {
             try

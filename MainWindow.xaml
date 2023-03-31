@@ -21,7 +21,7 @@
         <TextBox x:Name="txt_sql_command" Margin="605,22,15,0" VerticalAlignment="Top" TextWrapping="WrapWithOverflow" Height="111"/>
         <Button Margin="366,58,0,0" Click="Button_Click_2" Content="Open" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="92"/>
         <Label Content="Or open a .xlafml file" Margin="350,22,0,0" Height="27" VerticalAlignment="Top" HorizontalAlignment="Left" Width="124"/>
-        <DataGrid x:Name="query_data_grid" x:FieldModifier="public" Margin="0,189,0,0" AutoGenerateColumns="True"/>
+        <DataGrid x:Name="query_data_grid" x:FieldModifier="public" Margin="0,189,0,0" AutoGenerateColumns="True" EnableColumnVirtualization="True"/>
         <ProgressBar x:Name="query_progress" Margin="605,170,0,375" IsIndeterminate="True" HorizontalAlignment="Left" Width="295"/>
         <Button x:Name="btn_clear_datagrid" Content="Clear Datagrid" Margin="755,145,15,0" VerticalAlignment="Top" Click="btn_clear_datagrid_Click"/>
     </Grid>
