@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:sql_interface_net_wpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="575" Width="915" Icon="/Res/man.jpg" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Closed="Window_Closed">
+        Title="Xela's not so convenient mysql interface" Height="575" Width="915" Icon="/Res/man.jpg" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Closed="Window_Closed">
     <Grid RenderTransformOrigin="0.5,0.5">
         <Button Content="Execute Query" Margin="605,145,0,0" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="145" Click="Button_Click"/>
         <TextBox x:Name="txt_database_ip" HorizontalAlignment="Left" Margin="95,22,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18"/>
