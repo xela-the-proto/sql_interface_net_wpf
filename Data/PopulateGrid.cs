@@ -1,36 +1,21 @@
 ﻿using MySqlConnector;
 using sql_interface_net_wpf;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.Linq;
-using System.Numerics;
-using System.Reflection.PortableExecutable;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Markup;
-using System.Windows.Threading;
+
 
 namespace xelas_not_so_convenient_mysql_interface.Data
 {
     internal class PopulateGrid
     {
-        DataTable schema = new DataTable();
-        MySqlConnection conn = new MySqlConnection();
         MySqlCommand comm = new MySqlCommand();
         Stopwatch stopwatch_query = new Stopwatch();
         Stopwatch stopwatch_population = new Stopwatch();
-        public void initPopulator(DataTable schema, MySqlConnection conn, MySqlCommand comm)
+        public void initPopulator(MySqlCommand comm)
         {
-            this.schema = schema;
-            this.conn = conn;
             this.comm = comm;
         }
         

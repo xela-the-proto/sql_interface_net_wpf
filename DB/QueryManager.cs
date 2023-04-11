@@ -5,13 +5,7 @@ using System;
 using System.Data;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Transactions;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Xml.Linq;
 using xelas_not_so_convenient_mysql_interface.Data;
 using xelas_not_so_convenient_mysql_interface.DB;
 
@@ -41,11 +35,11 @@ namespace sql_interface_net_wpf.DB
                 if (comm.CommandText.Contains("SELECT"))
                 {
                     window.query_progress.IsEnabled  =true;
-                    populate.initPopulator(schema, conn_manager.getConnection(), comm);
+                    populate.initPopulator(comm);
                     //might remove multithreadign all together
-                    Thread research_thread = new Thread(new ThreadStart(populate.populateGrid));
-                    research_thread.SetApartmentState(ApartmentState.MTA);
-                    research_thread.Start();
+                    Thread grid_thread = new Thread(new ThreadStart(populate.populateGrid));
+                    grid_thread.SetApartmentState(ApartmentState.MTA);
+                    grid_thread.Start();
                 }
                 else
                 {
@@ -72,6 +66,7 @@ namespace sql_interface_net_wpf.DB
         
 
         //this method is pretty stupid for large queries but idk might move it somewhere
+        //on second thought it makes 0 sense but meh why not
         public void SaveTable(string command,string collection)
         {
             try

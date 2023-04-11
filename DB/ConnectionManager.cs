@@ -1,20 +1,13 @@
 ﻿using MySqlConnector;
 using sql_interface_net_wpf;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using xelas_not_so_convenient_mysql_interface.Data;
 
 namespace xelas_not_so_convenient_mysql_interface.DB
 {
     internal class ConnectionManager
     {
         MySqlConnection conn = new MySqlConnection();
-        ConfigRead config = new ConfigRead();
 
         public void connect(string ip, string db_name, string user_id, string user_password)
         {
