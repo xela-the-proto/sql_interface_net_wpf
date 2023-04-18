@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using xelas_not_so_convenient_mysql_interface.Data;
 using xelas_not_so_convenient_mysql_interface.DB;
+using xelas_not_so_convenient_mysql_interface.Windows;
 
 namespace sql_interface_net_wpf
 {
@@ -20,6 +21,9 @@ namespace sql_interface_net_wpf
         public MainWindow()
         {
             InitializeComponent();
+            Settings settings = new Settings();
+            settings.Show();
+            settings.Hide();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -72,15 +76,18 @@ namespace sql_interface_net_wpf
             Application.Current.Shutdown();
         }
 
-        private void Button_Click_3(object sender, RoutedEventArgs e)
-        {
-            
-        }
 
         private void btn_clear_datagrid_Click(object sender, RoutedEventArgs e)
         {
             query_data_grid.ItemsSource = null;
             query_data_grid.Items.Refresh();
+        }
+
+        private void open_settings_Click_1(object sender, RoutedEventArgs e)
+        {
+            Settings settings = new Settings();
+            
+            settings.Show();
         }
     }
 }

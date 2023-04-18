@@ -1,12 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
+using System.Xml;
 using System.Xml.Linq;
 
 namespace xelas_not_so_convenient_mysql_interface.Data
@@ -22,6 +17,11 @@ namespace xelas_not_so_convenient_mysql_interface.Data
         private bool dns;
         private string debug_msgbox_text;
         private string conn_string;
+
+        public bool verbose_time;
+
+
+
         public void readConnConfig()
         {
             try
@@ -81,6 +81,40 @@ namespace xelas_not_so_convenient_mysql_interface.Data
         public string getConnString()
         {
             return "server=" + db_ip + ";user id=" + user_id + ";password=" + user_password + ";database=" + db_name + ";";
+        }
+
+        public void readSettingsConf()
+        {
+            //TODO:ENABLE ON RELEASE
+            string location = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            string parsed_location = System.IO.Path.GetDirectoryName(location);
+
+            XmlReader reader = new XmlTextReader(parsed_location + "\\Settings.xml");
+
+            while (reader.Read())
+            {
+                if (reader.IsStartElement())
+                {
+                    //return only when you have START tag  
+                    switch (reader.Name)
+                    {
+                        case "verbose_times":
+                            if (reader.ReadElementContentAsString() == "True")
+                            {
+                                verbose_time = true;
+                            }
+                            else verbose_time = false;
+                            break;
+                    }
+                }
+            }
+        }
+
+
+        public bool VerboseTime
+        {
+            get => verbose_time;
+            set => verbose_time = value;
         }
     }
 }

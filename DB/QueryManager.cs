@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualBasic;
-using Microsoft.Win32;
-using MySqlConnector;
+﻿using MySqlConnector;
 using System;
 using System.Data;
 using System.Linq;
@@ -34,7 +32,6 @@ namespace sql_interface_net_wpf.DB
                 int totalCount = comm.Parameters.Count;
                 if (comm.CommandText.Contains("SELECT"))
                 {
-                    window.query_progress.IsEnabled  =true;
                     populate.initPopulator(comm);
                     //might remove multithreadign all together
                     Thread grid_thread = new Thread(new ThreadStart(populate.populateGrid));
@@ -55,7 +52,7 @@ namespace sql_interface_net_wpf.DB
             {
                 if (e.Message.Contains("CommandText must be specified"))
                 {
-                    MessageBox.Show("Missing mysql comamnd!","Query",MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Missing mysql command!","Query",MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 else MessageBox.Show(e.Message,"Error",MessageBoxButton.OK,MessageBoxImage.Error);
             }catch (Exception e)

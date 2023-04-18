@@ -14,6 +14,7 @@ namespace xelas_not_so_convenient_mysql_interface.Data
         MySqlCommand comm = new MySqlCommand();
         Stopwatch stopwatch_query = new Stopwatch();
         Stopwatch stopwatch_population = new Stopwatch();
+        ConfigRead read = new ConfigRead();
         public void initPopulator(MySqlCommand comm)
         {
             this.comm = comm;
@@ -27,7 +28,10 @@ namespace xelas_not_so_convenient_mysql_interface.Data
                 MainWindow window = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
                 window.query_data_grid.ItemsSource = null;
                 window.query_data_grid.Items.Refresh();
+
                 int rows_Affected = 0;
+
+                read.readSettingsConf();
                 try
                 {
                     
@@ -35,8 +39,10 @@ namespace xelas_not_so_convenient_mysql_interface.Data
                     stopwatch_query.Start();
                     comm.ExecuteNonQuery();
                     stopwatch_query.Stop();
+
                     MySqlDataAdapter sda = new MySqlDataAdapter(comm);
                     DataTable dt = new DataTable("Query_result");
+
                     stopwatch_population.Start();
                     sda.Fill(dt);
                     window.query_data_grid.ItemsSource = dt.DefaultView;
@@ -52,9 +58,22 @@ namespace xelas_not_so_convenient_mysql_interface.Data
                     TimeSpan population_elapsed = stopwatch_population.Elapsed;
                     if (comm.CommandText.Contains("SELECT"))
                     {
+                        /*
                         MessageBox.Show("Query done!\nTime to query " + query_elapsed +"\nTime to populate" + population_elapsed, "Query", MessageBoxButton.OK, MessageBoxImage.Question);
+                        */
                         stopwatch_population.Reset();
                         stopwatch_query.Reset();
+
+                        if (read.VerboseTime)
+                        {
+                            window.status_s_query.Text = "Last population time =" + query_elapsed.TotalSeconds + "s";
+                            window.status_s_popul.Text = "Last query time =" + population_elapsed.TotalSeconds + "s";
+                        }
+                        else if (!read.VerboseTime)
+                        {
+                            window.status_s_query.Text = "Last population time =" + query_elapsed.Seconds + "s";
+                            window.status_s_popul.Text = "Last query time =" + population_elapsed.Seconds + "s";
+                        }
                     }
                     else
                     {
