@@ -108,6 +108,8 @@ namespace xelas_not_so_convenient_mysql_interface.Data
                     }
                 }
             }
+
+            reader.Close();
         }
 
 

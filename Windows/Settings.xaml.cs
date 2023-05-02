@@ -1,25 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Xml;
+using xelas_not_so_convenient_mysql_interface.Data;
+using xelas_not_so_convenient_mysql_interface.Exc;
 
 namespace xelas_not_so_convenient_mysql_interface.Windows
 {
-    /// <summary>
-    /// Interaction logic for Settings.xaml
-    /// </summary>
     public partial class Settings : Window
     {
         private bool verbose_times;
@@ -28,18 +15,20 @@ namespace xelas_not_so_convenient_mysql_interface.Windows
             InitializeComponent();
         }
 
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+
+        private void Window_Activated(object sender, EventArgs e)
         {
-            if (checkbox_times_verbose.IsChecked == true)
+            ConfigRead read = new ConfigRead();
+
+            read.readSettingsConf();
+
+            if (read.VerboseTime)
             {
-                verbose_times = true;
+                checkbox_times_verbose.IsChecked = true;
             }
-            else
-            {
-                verbose_times = false;
-            }
+            else checkbox_times_verbose.IsChecked = false;
         }
-         
+
         private void Window_closed(object sender, EventArgs e)
         {
             
@@ -62,5 +51,36 @@ namespace xelas_not_so_convenient_mysql_interface.Windows
             xmlWriter.WriteString(value);
             xmlWriter.WriteEndElement();
         }
+
+        public void write_defaults()
+        {
+            try
+            {
+                if (File.Exists("\\Settings.xml"))
+                {
+                    return;
+                }
+
+                string location = System.Reflection.Assembly.GetExecutingAssembly().Location;
+                string? parsed_location = Path.GetDirectoryName(location);
+                if (parsed_location == null)
+                {
+                    throw new CodeFoxException();
+                }
+                XmlTextWriter xmlWriter = new XmlTextWriter(parsed_location + "\\Settings.xml", null);
+                xmlWriter.Formatting = Formatting.Indented;
+                xmlWriter.WriteStartDocument();
+                write("verbose_times", "True", xmlWriter);
+                xmlWriter.Close();
+            }
+            catch (CodeFoxException e)
+            {
+                MessageBox.Show("Critical error!", "Critical error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                Application.Current.Shutdown();
+            }
+            
+        }
+
+       
     }
 }

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <configuration>
-	<dbip ip = "127.0.0.1"/>
+	<dbip ip = "192.168.1.140"/>
 	<userid id = "root"/>
 	<userpassword password = "root"/>
 	<dbname name = "employees"/>

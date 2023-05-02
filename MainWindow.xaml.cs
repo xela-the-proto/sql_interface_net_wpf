@@ -21,9 +21,6 @@ namespace sql_interface_net_wpf
         public MainWindow()
         {
             InitializeComponent();
-            Settings settings = new Settings();
-            settings.Show();
-            settings.Hide();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
