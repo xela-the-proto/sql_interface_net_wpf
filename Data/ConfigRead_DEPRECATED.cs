@@ -6,7 +6,7 @@ using System.Xml.Linq;
 
 namespace xelas_not_so_convenient_mysql_interface.Data
 {
-    internal class ConfigRead
+    internal class ConfigRead_DEPRECATED
     {
         private string db_ip;
         private string db_name;

@@ -18,7 +18,7 @@ namespace xelas_not_so_convenient_mysql_interface.Windows
 
         private void Window_Activated(object sender, EventArgs e)
         {
-            ConfigRead read = new ConfigRead();
+            ConfigRead_DEPRECATED read = new ConfigRead_DEPRECATED();
 
             read.readSettingsConf();
 

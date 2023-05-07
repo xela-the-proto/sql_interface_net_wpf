@@ -16,7 +16,7 @@ namespace sql_interface_net_wpf
     {
        
         ConnectionManager connectionManager = new ConnectionManager();
-        ConfigRead configRead = new ConfigRead();
+        ConfigRead_DEPRECATED configRead = new ConfigRead_DEPRECATED();
         QueryManager queryDb = new QueryManager();
         public MainWindow()
         {

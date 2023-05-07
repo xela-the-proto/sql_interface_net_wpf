@@ -14,7 +14,7 @@ namespace xelas_not_so_convenient_mysql_interface.Data
         MySqlCommand comm = new MySqlCommand();
         Stopwatch stopwatch_query = new Stopwatch();
         Stopwatch stopwatch_population = new Stopwatch();
-        ConfigRead read = new ConfigRead();
+        ConfigRead_DEPRECATED read = new ConfigRead_DEPRECATED();
         public void initPopulator(MySqlCommand comm)
         {
             this.comm = comm;

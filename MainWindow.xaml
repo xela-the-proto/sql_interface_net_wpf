@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Xela's not so convenient mysql interface" Height="730" Width="1130" Icon="/Res/man.jpg" WindowStartupLocation="CenterScreen" Closed="Window_Closed" SizeToContent="WidthAndHeight" ResizeMode="NoResize">
+        Title="MySQL GUI build SCHOOL.2" Height="730" Width="1130" Icon="/Res/man.jpg" WindowStartupLocation="CenterScreen" Closed="Window_Closed" SizeToContent="WidthAndHeight" ResizeMode="NoResize">
     <Grid RenderTransformOrigin="0.5,0.5">
         <Button Content="Execute Query" Margin="610,158,265,0" Height="20" VerticalAlignment="Top" Click="Button_Click"/>
         <TextBox x:Name="txt_database_ip" HorizontalAlignment="Left" Margin="100,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18"/>
