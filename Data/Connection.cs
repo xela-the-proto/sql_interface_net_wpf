@@ -36,5 +36,10 @@ namespace xelas_not_so_convenient_mysql_interface.Data
         public string db_name { get; set;}
         public string user_id { get; set; }
         public string user_password { get; set; }
+
+        public string getConnString()
+        {
+            return "server=" + db_ip + ";user id=" + user_id + ";password=" + user_password + ";database=" + db_name + ";";
+        }
     }
 }
