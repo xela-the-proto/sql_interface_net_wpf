@@ -1,7 +1,4 @@
-﻿
-
-using System;
-using System.IO;
+﻿using System.IO;
 using System.Windows;
 using Newtonsoft.Json;
 
@@ -10,11 +7,16 @@ namespace xelas_not_so_convenient_mysql_interface.Data
     internal class JSONReadWriteExperimental
     {
 
-        private void writeConnectionJSON()
+        public void writeConnectionJSON()
         {
             //TODO:rewrite this method
+            string dir = ".\\Config\\";
+            if (!Directory.Exists(dir))
+            {
+                Directory.CreateDirectory(dir);
+            }
             Connection connection = new Connection("192.168.1.140", "employees", "root", "root");
-            using (StreamWriter file = File.CreateText(".\\connection.json"))
+            using (StreamWriter file = File.CreateText(".\\Config\\connection.json"))
             {
                 JsonSerializer serializer = new JsonSerializer();
                 serializer.Serialize(file,connection);
@@ -24,11 +26,13 @@ namespace xelas_not_so_convenient_mysql_interface.Data
 
         public Connection readConnectionJSON()
         {
+            string location = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            string parsed_location = System.IO.Path.GetDirectoryName(location);
+
             Connection? connection = new Connection();
             try
             {
-                
-                using (StreamReader file = File.OpenText(".\\connection.json"))
+                using (StreamReader file = File.OpenText(".\\Config\\connection.json"))
                 {
                     JsonSerializer serializer = new JsonSerializer();
                     connection = (Connection)serializer.Deserialize(file, typeof(Connection));
@@ -44,8 +48,5 @@ namespace xelas_not_so_convenient_mysql_interface.Data
             }
             return connection;
         }
-
-
-
     }
 }
