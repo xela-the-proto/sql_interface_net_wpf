@@ -18,20 +18,38 @@ namespace sql_interface_net_wpf
         ConnectionManager connectionManager = new ConnectionManager();
         ConfigRead_DEPRECATED configRead = new ConfigRead_DEPRECATED();
         QueryManager queryDb = new QueryManager();
+        JSONReadWriteExperimental jsonReadWrite = new JSONReadWriteExperimental();
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        
+
+        private void Json_connect(object sender, RoutedEventArgs e)
+        {
+            disable_buttons();
+            Connection connection = new Connection();
+            connection = jsonReadWrite.readConnectionJSON();
+            connectionManager.connect(connection.getConnString());
+        }
+
+        private void Manual_connect(object sender, RoutedEventArgs e)
         {
             disable_buttons();
             connectionManager.connect(txt_database_ip.Text, txt_database_name.Text, txt_database_user_id.Text, psw_user_database_password.Password);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Xlafml_read(object sender, RoutedEventArgs e)
         {
-            queryDb.Query(txt_sql_command.Text,connectionManager);
+            disable_buttons();
+            configRead.readConnConfig();
+            connectionManager.connect(configRead.getConnString());
+        }
+
+        private void Query(object sender, RoutedEventArgs e)
+        {
+            queryDb.Query(txt_sql_command.Text, connectionManager);
         }
 
         public void disable_buttons() {
@@ -54,12 +72,6 @@ namespace sql_interface_net_wpf
             btn_disconnect.IsEnabled = false;
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            disable_buttons();
-            configRead.readConnConfig();
-            connectionManager.connect(configRead.getConnString());
-        }
 
         private void btn_disconnect_Click(object sender, RoutedEventArgs e)
         {
