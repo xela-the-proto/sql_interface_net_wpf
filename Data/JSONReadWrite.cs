@@ -59,14 +59,15 @@ namespace xelas_not_so_convenient_mysql_interface.Data
 
             try
             {
-                using(StreamReader file = File.OpenText(".\\Config\\settings.json"))
+                if (!File.Exists(".\\Config\\settings.json"))
+                {
+                    writeSettingsJSON(settings);
+                }
+                using (StreamReader file = File.OpenText(".\\Config\\settings.json"))
                 {
                     JsonSerializer serializer = new JsonSerializer();
                     settings = (Settings)serializer.Deserialize(file, typeof(Settings));
-                    if (!File.Exists(".\\Config\\settings.json"))
-                    {
-                        writeSettingsJSON(settings);
-                    }
+                    
                 }
             }
             catch (System.Exception)
@@ -89,7 +90,6 @@ namespace xelas_not_so_convenient_mysql_interface.Data
             {
                 JsonSerializer serializer = new JsonSerializer();
                 serializer.Serialize(file, settings);
-                MessageBox.Show("wrote to file");
             }
         }
     }

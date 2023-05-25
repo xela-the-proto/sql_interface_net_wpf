@@ -3,7 +3,6 @@ using System.IO;
 using System.Windows;
 using System.Xml;
 using xelas_not_so_convenient_mysql_interface.Data;
-using xelas_not_so_convenient_mysql_interface.JSONClasses;
 
 namespace xelas_not_so_convenient_mysql_interface.Windows
 {

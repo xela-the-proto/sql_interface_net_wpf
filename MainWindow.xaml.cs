@@ -17,7 +17,6 @@ namespace sql_interface_net_wpf
     {
        
         ConnectionManager connectionManager = new ConnectionManager();
-        ConfigRead_DEPRECATED configRead = new ConfigRead_DEPRECATED();
         QueryManager queryDb = new QueryManager();
         JSONReadWrite jsonReadWrite = new JSONReadWrite();
         public MainWindow()
@@ -39,13 +38,6 @@ namespace sql_interface_net_wpf
         {
             disable_buttons();
             connectionManager.connect(txt_database_ip.Text, txt_database_name.Text, txt_database_user_id.Text, psw_user_database_password.Password);
-        }
-
-        private void Xlafml_read(object sender, RoutedEventArgs e)
-        {
-            disable_buttons();
-            configRead.readConnConfig();
-            connectionManager.connect(configRead.getConnString());
         }
 
         private void Query(object sender, RoutedEventArgs e)
