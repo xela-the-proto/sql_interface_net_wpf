@@ -5,16 +5,17 @@ using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows;
-
+using xelas_not_so_convenient_mysql_interface.JSONClasses;
 
 namespace xelas_not_so_convenient_mysql_interface.Data
 {
     internal class PopulateGrid
     {
         MySqlCommand comm = new MySqlCommand();
+        xelas_not_so_convenient_mysql_interface.JSONClasses.Settings settings = new Settings();
         Stopwatch stopwatch_query = new Stopwatch();
         Stopwatch stopwatch_population = new Stopwatch();
-        ConfigRead_DEPRECATED read = new ConfigRead_DEPRECATED();
+        JSONReadWrite json = new JSONReadWrite();
         public void initPopulator(MySqlCommand comm)
         {
             this.comm = comm;
@@ -29,12 +30,10 @@ namespace xelas_not_so_convenient_mysql_interface.Data
                 window.query_data_grid.ItemsSource = null;
                 window.query_data_grid.Items.Refresh();
 
+                settings = json.readSettingsJSON();
                 int rows_Affected = 0;
-
-                read.readSettingsConf();
                 try
                 {
-                    
                     MessageBox.Show("!!ATTENTION!!\n After closing this box the program might hang for a while depending on the query size\n Im experimenting in making it a thread", "warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                     stopwatch_query.Start();
                     comm.ExecuteNonQuery();
@@ -64,12 +63,12 @@ namespace xelas_not_so_convenient_mysql_interface.Data
                         stopwatch_population.Reset();
                         stopwatch_query.Reset();
 
-                        if (read.VerboseTime)
+                        if (settings.verbose_times)
                         {
                             window.status_s_query.Text = "Last population time =" + query_elapsed.TotalSeconds + "s";
                             window.status_s_popul.Text = "Last query time =" + population_elapsed.TotalSeconds + "s";
                         }
-                        else if (!read.VerboseTime)
+                        else if (!settings.verbose_times)
                         {
                             window.status_s_query.Text = "Last population time =" + query_elapsed.Seconds + "s";
                             window.status_s_popul.Text = "Last query time =" + population_elapsed.Seconds + "s";

@@ -34,4 +34,8 @@
     <Resource Include="Res\man.jpg" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Exc\" />
+  </ItemGroup>
+
 </Project>

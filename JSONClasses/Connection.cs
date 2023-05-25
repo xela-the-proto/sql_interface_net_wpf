@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace xelas_not_so_convenient_mysql_interface.Data
+namespace xelas_not_so_convenient_mysql_interface.JSONClasses
 {
     internal class Connection
     {
@@ -33,7 +33,7 @@ namespace xelas_not_so_convenient_mysql_interface.Data
         }
 
         public string db_ip { get; set; }
-        public string db_name { get; set;}
+        public string db_name { get; set; }
         public string user_id { get; set; }
         public string user_password { get; set; }
 

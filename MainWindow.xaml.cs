@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using xelas_not_so_convenient_mysql_interface.Data;
 using xelas_not_so_convenient_mysql_interface.DB;
+using xelas_not_so_convenient_mysql_interface.JSONClasses;
 using xelas_not_so_convenient_mysql_interface.Windows;
 
 namespace sql_interface_net_wpf
@@ -18,7 +19,7 @@ namespace sql_interface_net_wpf
         ConnectionManager connectionManager = new ConnectionManager();
         ConfigRead_DEPRECATED configRead = new ConfigRead_DEPRECATED();
         QueryManager queryDb = new QueryManager();
-        JSONReadWriteExperimental jsonReadWrite = new JSONReadWriteExperimental();
+        JSONReadWrite jsonReadWrite = new JSONReadWrite();
         public MainWindow()
         {
             InitializeComponent();
@@ -94,7 +95,7 @@ namespace sql_interface_net_wpf
 
         private void open_settings_Click_1(object sender, RoutedEventArgs e)
         {
-            Settings settings = new Settings();
+            xelas_not_so_convenient_mysql_interface.Windows.Settings settings = new xelas_not_so_convenient_mysql_interface.Windows.Settings();
             
             settings.Show();
         }
