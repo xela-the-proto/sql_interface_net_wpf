@@ -16,8 +16,6 @@ namespace sql_interface_net_wpf
     {
         void App_Startup(object sender, StartupEventArgs e)
         {
-            Settings settings = new Settings();
-            settings.write_defaults();
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();
         }

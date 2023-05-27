@@ -3,7 +3,6 @@ using System.IO;
 using System.Windows;
 using System.Xml;
 using xelas_not_so_convenient_mysql_interface.Data;
-using xelas_not_so_convenient_mysql_interface.Exc;
 
 namespace xelas_not_so_convenient_mysql_interface.Windows
 {
@@ -18,11 +17,11 @@ namespace xelas_not_so_convenient_mysql_interface.Windows
 
         private void Window_Activated(object sender, EventArgs e)
         {
-            ConfigRead_DEPRECATED read = new ConfigRead_DEPRECATED();
+            JSONReadWrite json = new JSONReadWrite();
+            xelas_not_so_convenient_mysql_interface.JSONClasses.Settings settings;
 
-            read.readSettingsConf();
-
-            if (read.VerboseTime)
+            settings = json.readSettingsJSON();
+            if (settings.verbose_times)
             {
                 checkbox_times_verbose.IsChecked = true;
             }
@@ -31,56 +30,20 @@ namespace xelas_not_so_convenient_mysql_interface.Windows
 
         private void Window_closed(object sender, EventArgs e)
         {
-            
-            //TODO:ENABLE ON RELEASE
             string location = System.Reflection.Assembly.GetExecutingAssembly().Location;
             string parsed_location = System.IO.Path.GetDirectoryName(location);
 
+            JSONReadWrite json = new JSONReadWrite();
+            xelas_not_so_convenient_mysql_interface.JSONClasses.Settings settings = new  xelas_not_so_convenient_mysql_interface.JSONClasses.Settings();
 
-            XmlTextWriter xmlWriter = new XmlTextWriter(parsed_location + "\\Settings.xml", null);
-            xmlWriter.Formatting = Formatting.Indented;
-            xmlWriter.WriteStartDocument();
-            write("verbose_times",verbose_times.ToString(),xmlWriter);
-            xmlWriter.Close();
-            this.Hide();
-        }
-
-        private void write(string element, string value, XmlWriter xmlWriter)
-        {
-            xmlWriter.WriteStartElement(element, "");
-            xmlWriter.WriteString(value);
-            xmlWriter.WriteEndElement();
-        }
-
-        public void write_defaults()
-        {
-            try
+            if ((bool)checkbox_times_verbose.IsChecked)
             {
-                if (File.Exists("\\Settings.xml"))
-                {
-                    return;
-                }
+                settings.verbose_times = true;
+            }
+            else settings.verbose_times = false;
 
-                string location = System.Reflection.Assembly.GetExecutingAssembly().Location;
-                string? parsed_location = Path.GetDirectoryName(location);
-                if (parsed_location == null)
-                {
-                    throw new CodeFoxException();
-                }
-                XmlTextWriter xmlWriter = new XmlTextWriter(parsed_location + "\\Settings.xml", null);
-                xmlWriter.Formatting = Formatting.Indented;
-                xmlWriter.WriteStartDocument();
-                write("verbose_times", "True", xmlWriter);
-                xmlWriter.Close();
-            }
-            catch (CodeFoxException e)
-            {
-                MessageBox.Show("Critical error!", "Critical error!", MessageBoxButton.OK, MessageBoxImage.Error);
-                Application.Current.Shutdown();
-            }
-            
+            json.writeSettingsJSON(settings);
         }
-
        
     }
 }

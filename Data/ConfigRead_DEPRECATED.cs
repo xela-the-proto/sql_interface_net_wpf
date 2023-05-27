@@ -8,6 +8,14 @@ namespace xelas_not_so_convenient_mysql_interface.Data
 {
     internal class ConfigRead_DEPRECATED
     {
+        /*
+         *
+         *  ========================================================
+         *  THIS CODE IS DEPRECATED AND WILL NO LONGER BE MAINTAINED
+         *  ========================================================
+         *
+         *
+         */
         private string db_ip;
         private string db_name;
         private string user_id;

@@ -13,13 +13,11 @@ namespace sql_interface_net_wpf.DB
     {
         MySqlConnection conn = new MySqlConnection();
         MySqlCommand comm = new MySqlCommand();
-        DataTable schema = new DataTable();
         PopulateGrid populate = new PopulateGrid();
         public QueryManager()
         {
 
         }
-
 
         public void Query(string command, ConnectionManager conn_manager)
         {
@@ -33,7 +31,7 @@ namespace sql_interface_net_wpf.DB
                 if (comm.CommandText.Contains("SELECT"))
                 {
                     populate.initPopulator(comm);
-                    //might remove multithreadign all together
+                    //might remove multithreading all together
                     Thread grid_thread = new Thread(new ThreadStart(populate.populateGrid));
                     grid_thread.SetApartmentState(ApartmentState.MTA);
                     grid_thread.Start();
@@ -64,6 +62,7 @@ namespace sql_interface_net_wpf.DB
 
         //this method is pretty stupid for large queries but idk might move it somewhere
         //on second thought it makes 0 sense but meh why not
+        //idk why im not deleting this but lol 
         public void SaveTable(string command,string collection)
         {
             try

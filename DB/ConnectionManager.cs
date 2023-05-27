@@ -3,7 +3,6 @@ using sql_interface_net_wpf;
 using System;
 using System.Linq;
 using System.Windows;
-using xelas_not_so_convenient_mysql_interface.Exc;
 
 namespace xelas_not_so_convenient_mysql_interface.DB
 {
@@ -19,7 +18,7 @@ namespace xelas_not_so_convenient_mysql_interface.DB
             {
                 if (window == null)
                 {
-                    throw new CodeFoxException();
+                    throw new ArgumentNullException();
                 }
                 conn.ConnectionString = "server=" + ip + ";user id=" + user_id
                                         + ";password=" + user_password + ";database=" + db_name + ";";
@@ -38,10 +37,11 @@ namespace xelas_not_so_convenient_mysql_interface.DB
                         MessageBoxImage.Error);
                 }
             }
-            catch (CodeFoxException e)
+            catch (ArgumentNullException e)
             {
                 MessageBox.Show("Critical error! Program has to shut down!", "Critical Error!", MessageBoxButton.OK,
                     MessageBoxImage.Error);
+                Application.Current.Shutdown();
             }
             finally
             {
@@ -56,7 +56,7 @@ namespace xelas_not_so_convenient_mysql_interface.DB
             {
                 if (window == null)
                 {
-                    throw new CodeFoxException();
+                    throw new ArgumentNullException();
                 }
                 conn.ConnectionString = conn_string;
                 conn.Open();

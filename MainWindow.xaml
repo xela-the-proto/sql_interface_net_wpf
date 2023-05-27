@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="MySQL GUI build SCHOOL.2" Height="730" Width="1130" Icon="/Res/man.jpg" WindowStartupLocation="CenterScreen" Closed="Window_Closed" SizeToContent="WidthAndHeight" ResizeMode="NoResize">
+        Title="MySQL GUI build V0.3" Height="730" Width="1130" Icon="/Res/man.jpg" WindowStartupLocation="CenterScreen" Closed="Window_Closed" SizeToContent="WidthAndHeight" ResizeMode="NoResize">
     <Grid RenderTransformOrigin="0.5,0.5">
         <Button Content="Execute Query" Margin="610,158,265,0" Height="20" VerticalAlignment="Top" Click="Query"/>
         <TextBox x:Name="txt_database_ip" HorizontalAlignment="Left" Margin="100,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18"/>
@@ -18,8 +18,8 @@
         <PasswordBox x:Name="psw_user_database_password" Margin="100,138,0,0" Width="120" Height="18" VerticalAlignment="Top" HorizontalAlignment="Left" d:IsLocked="True"/>
         <Button x:Name="btn_disconnect" Content="Disconnect" HorizontalAlignment="Left" Margin="84,163,0,0" VerticalAlignment="Top" Height="19" Width="70" Click="btn_disconnect_Click"/>
         <TextBox x:Name="txt_sql_command" Margin="610,41,10,0" TextWrapping="WrapWithOverflow" Height="111" VerticalAlignment="Top"/>
-        <Button Margin="377,152,0,0" Click="Json_connect" Content="Connect" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="92"/>
-        <Label Content="Or connect using the connection.json file" Margin="306,116,0,0" Height="27" VerticalAlignment="Top" HorizontalAlignment="Left" Width="234"/>
+        <Button Margin="382,88,0,0" Click="Json_connect" Content="Connect" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="92"/>
+        <Label Content="Or connect using the connection.json file" Margin="311,52,0,0" Height="27" VerticalAlignment="Top" HorizontalAlignment="Left" Width="234"/>
         <DataGrid x:Name="query_data_grid" x:FieldModifier="public" Margin="0,189,0,0" AutoGenerateColumns="True" EnableColumnVirtualization="True" Height="500" VerticalAlignment="Top"/>
         <Button x:Name="btn_clear_datagrid" Content="Clear Datagrid" Margin="870,158,10,0" VerticalAlignment="Top" Click="btn_clear_datagrid_Click"/>
         <StatusBar x:Name="status_bar" Height="25" Margin="0,549,0,0" VerticalAlignment="Bottom" >
@@ -39,7 +39,5 @@
                 <MenuItem Header="_Open" Name="open_settings" Click="open_settings_Click_1"></MenuItem>
             </MenuItem>
         </Menu>
-        <Button Margin="377,73,0,0" Content="Connect" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="92" Click="Xlafml_read"/>
-        <Label Content="Or connect using the .xlafml file" Margin="334,36,0,0" Height="28" VerticalAlignment="Top" HorizontalAlignment="Left" Width="178"/>
     </Grid>
 </Window>
