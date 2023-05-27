@@ -11,19 +11,19 @@ namespace xelas_not_so_convenient_mysql_interface.Data
 {
     internal class PopulateGrid
     {
-        MySqlCommand comm = new MySqlCommand();
-        xelas_not_so_convenient_mysql_interface.JSONClasses.Settings settings = new Settings();
-        Stopwatch stopwatch_query = new Stopwatch();
-        Stopwatch stopwatch_population = new Stopwatch();
-        JSONReadWrite json = new JSONReadWrite();
+        private MySqlCommand comm = new MySqlCommand();
+        private xelas_not_so_convenient_mysql_interface.JSONClasses.Settings settings = new Settings();
+        private Stopwatch stopwatch_query = new Stopwatch();
+        private Stopwatch stopwatch_population = new Stopwatch();
+        private JSONReadWrite json = new JSONReadWrite();
+
         public void initPopulator(MySqlCommand comm)
         {
             this.comm = comm;
         }
-        
+
         public void populateGrid()
         {
-
             Application.Current.Dispatcher.Invoke(() =>
             {
                 MainWindow window = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
@@ -49,7 +49,6 @@ namespace xelas_not_so_convenient_mysql_interface.Data
                 }
                 catch (Exception ex)
                 {
-
                 }
                 finally
                 {
@@ -78,11 +77,8 @@ namespace xelas_not_so_convenient_mysql_interface.Data
                     {
                         MessageBox.Show("Done! Lines affected " + rows_Affected + "", "Query", MessageBoxButton.OK, MessageBoxImage.Question);
                     }
-                    
                 }
             });
-
-            
         }
     }
 }

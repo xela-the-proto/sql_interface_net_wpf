@@ -11,12 +11,12 @@ namespace sql_interface_net_wpf.DB
 {
     internal class QueryManager
     {
-        MySqlConnection conn = new MySqlConnection();
-        MySqlCommand comm = new MySqlCommand();
-        PopulateGrid populate = new PopulateGrid();
+        private MySqlConnection conn = new MySqlConnection();
+        private MySqlCommand comm = new MySqlCommand();
+        private PopulateGrid populate = new PopulateGrid();
+
         public QueryManager()
         {
-
         }
 
         public void Query(string command, ConnectionManager conn_manager)
@@ -44,26 +44,26 @@ namespace sql_interface_net_wpf.DB
             }
             catch (MySqlException e)
             {
-                MessageBox.Show(e.Message,"Error",MessageBoxButton.OK,MessageBoxImage.Error);
+                MessageBox.Show(e.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            catch(InvalidOperationException e)
+            catch (InvalidOperationException e)
             {
                 if (e.Message.Contains("CommandText must be specified"))
                 {
-                    MessageBox.Show("Missing mysql command!","Query",MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Missing mysql command!", "Query", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-                else MessageBox.Show(e.Message,"Error",MessageBoxButton.OK,MessageBoxImage.Error);
-            }catch (Exception e)
+                else MessageBox.Show(e.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (Exception e)
             {
                 MessageBox.Show(e.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        
 
         //this method is pretty stupid for large queries but idk might move it somewhere
         //on second thought it makes 0 sense but meh why not
-        //idk why im not deleting this but lol 
-        public void SaveTable(string command,string collection)
+        //idk why im not deleting this but lol
+        public void SaveTable(string command, string collection)
         {
             try
             {
@@ -75,6 +75,5 @@ namespace sql_interface_net_wpf.DB
                 MessageBox.Show(e.Message);
             }
         }
-
     }
 }

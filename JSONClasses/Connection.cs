@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace xelas_not_so_convenient_mysql_interface.JSONClasses
+﻿namespace xelas_not_so_convenient_mysql_interface.JSONClasses
 {
     internal class Connection
     {
@@ -16,6 +10,7 @@ namespace xelas_not_so_convenient_mysql_interface.JSONClasses
           private string dns_text = "";
          *
         */
+
         public Connection(string db_ip, string db_name, string user_id, string user_password)
         {
             this.db_ip = db_ip;

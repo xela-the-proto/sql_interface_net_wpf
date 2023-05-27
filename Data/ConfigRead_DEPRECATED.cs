@@ -28,8 +28,6 @@ namespace xelas_not_so_convenient_mysql_interface.Data
 
         public bool verbose_time;
 
-
-
         public void readConnConfig()
         {
             try
@@ -83,7 +81,6 @@ namespace xelas_not_so_convenient_mysql_interface.Data
                     MessageBox.Show("no file was selected!", "Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
-            
         }
 
         public string getConnString()
@@ -103,7 +100,7 @@ namespace xelas_not_so_convenient_mysql_interface.Data
             {
                 if (reader.IsStartElement())
                 {
-                    //return only when you have START tag  
+                    //return only when you have START tag
                     switch (reader.Name)
                     {
                         case "verbose_times":
@@ -119,7 +116,6 @@ namespace xelas_not_so_convenient_mysql_interface.Data
 
             reader.Close();
         }
-
 
         public bool VerboseTime
         {

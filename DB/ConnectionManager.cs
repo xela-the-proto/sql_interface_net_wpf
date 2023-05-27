@@ -8,8 +8,7 @@ namespace xelas_not_so_convenient_mysql_interface.DB
 {
     internal class ConnectionManager
     {
-        MySqlConnection conn = new MySqlConnection();
-        
+        private MySqlConnection conn = new MySqlConnection();
 
         public void connect(string ip, string db_name, string user_id, string user_password)
         {
@@ -23,7 +22,6 @@ namespace xelas_not_so_convenient_mysql_interface.DB
                 conn.ConnectionString = "server=" + ip + ";user id=" + user_id
                                         + ";password=" + user_password + ";database=" + db_name + ";";
                 conn.Open();
-
             }
             catch (MySqlException e)
             {

@@ -1,13 +1,12 @@
-﻿using System.IO;
+﻿using Newtonsoft.Json;
+using System.IO;
 using System.Windows;
-using Newtonsoft.Json;
 using xelas_not_so_convenient_mysql_interface.JSONClasses;
 
 namespace xelas_not_so_convenient_mysql_interface.Data
 {
     internal class JSONReadWrite
     {
-
         public void writeConnectionJSON()
         {
             //TODO:rewrite this method
@@ -20,7 +19,7 @@ namespace xelas_not_so_convenient_mysql_interface.Data
             using (StreamWriter file = File.CreateText(".\\Config\\connection.json"))
             {
                 JsonSerializer serializer = new JsonSerializer();
-                serializer.Serialize(file,connection);
+                serializer.Serialize(file, connection);
                 MessageBox.Show("wrote to file");
             }
         }
@@ -67,7 +66,6 @@ namespace xelas_not_so_convenient_mysql_interface.Data
                 {
                     JsonSerializer serializer = new JsonSerializer();
                     settings = (Settings)serializer.Deserialize(file, typeof(Settings));
-                    
                 }
             }
             catch (System.Exception)
