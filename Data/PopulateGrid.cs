@@ -34,7 +34,6 @@ namespace xelas_not_so_convenient_mysql_interface.Data
                 int rows_Affected = 0;
                 try
                 {
-                    MessageBox.Show("!!ATTENTION!!\n After closing this box the program might hang for a while depending on the query size\n Im experimenting in making it a thread", "warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                     stopwatch_query.Start();
                     comm.ExecuteNonQuery();
                     stopwatch_query.Stop();
@@ -49,35 +48,35 @@ namespace xelas_not_so_convenient_mysql_interface.Data
                 }
                 catch (Exception ex)
                 {
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-                finally
+                
+                TimeSpan query_elapsed = stopwatch_query.Elapsed;
+                TimeSpan population_elapsed = stopwatch_population.Elapsed;
+                if (comm.CommandText.Contains("SELECT"))
                 {
-                    TimeSpan query_elapsed = stopwatch_query.Elapsed;
-                    TimeSpan population_elapsed = stopwatch_population.Elapsed;
-                    if (comm.CommandText.Contains("SELECT"))
-                    {
-                        /*
-                        MessageBox.Show("Query done!\nTime to query " + query_elapsed +"\nTime to populate" + population_elapsed, "Query", MessageBoxButton.OK, MessageBoxImage.Question);
-                        */
-                        stopwatch_population.Reset();
-                        stopwatch_query.Reset();
+                    /*
+                    MessageBox.Show("Query done!\nTime to query " + query_elapse    +"\nTimetopopulate"+population_elapsed,"Query",MessageBoxButton.OK, MessageBoxImage.Question);
+                    */
+                    stopwatch_population.Reset();
+                    stopwatch_query.Reset();
 
-                        if (settings.verbose_times)
-                        {
-                            window.status_s_query.Text = "Last population time =" + query_elapsed.TotalSeconds + "s";
-                            window.status_s_popul.Text = "Last query time =" + population_elapsed.TotalSeconds + "s";
-                        }
-                        else if (!settings.verbose_times)
-                        {
-                            window.status_s_query.Text = "Last population time =" + query_elapsed.Seconds + "s";
-                            window.status_s_popul.Text = "Last query time =" + population_elapsed.Seconds + "s";
-                        }
-                    }
-                    else
+                    if (settings.verbose_times)
                     {
-                        MessageBox.Show("Done! Lines affected " + rows_Affected + "", "Query", MessageBoxButton.OK, MessageBoxImage.Question);
+                        window.status_s_query.Text = "Last population time =" + query_elapsed.TotalSeconds + "s";
+                        window.status_s_popul.Text = "Last query time =" + population_elapsed.TotalSeconds + "s";
+                    }
+                    else if (!settings.verbose_times)
+                    {
+                        window.status_s_query.Text = "Last population time =" + query_elapsed.Seconds + "s";
+                        window.status_s_popul.Text = "Last query time =" + population_elapsed.Seconds + "s";
                     }
                 }
+                else
+                {
+                    MessageBox.Show("Done! Lines affected " + rows_Affected + "","Query",MessageBoxButton.OK,MessageBoxImage.Question);
+                }
+                
             });
         }
     }

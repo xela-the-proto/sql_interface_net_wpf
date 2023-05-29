@@ -41,10 +41,8 @@ namespace xelas_not_so_convenient_mysql_interface.DB
                     MessageBoxImage.Error);
                 Application.Current.Shutdown();
             }
-            finally
-            {
-                window.status_text_connection.Text = "Connection status: Open";
-            }
+            window.status_text_connection.Text = "Connection status: Open";
+            
         }
 
         public void connect(string conn_string)
@@ -72,10 +70,8 @@ namespace xelas_not_so_convenient_mysql_interface.DB
                         MessageBoxImage.Error);
                 }
             }
-            finally
-            {
-                window.status_text_connection.Text = "Connection status: Open";
-            }
+
+            window.status_text_connection.Text = "Connection status: Open";
         }
 
         public void disconnect()
