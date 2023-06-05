@@ -10,12 +10,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Exc\**" />
     <Compile Remove="testdb\**" />
     <Compile Remove="Utilities\**" />
+    <EmbeddedResource Remove="Exc\**" />
     <EmbeddedResource Remove="testdb\**" />
     <EmbeddedResource Remove="Utilities\**" />
+    <None Remove="Exc\**" />
     <None Remove="testdb\**" />
     <None Remove="Utilities\**" />
+    <Page Remove="Exc\**" />
     <Page Remove="testdb\**" />
     <Page Remove="Utilities\**" />
   </ItemGroup>
@@ -32,10 +36,6 @@
 
   <ItemGroup>
     <Resource Include="Res\man.jpg" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Exc\" />
   </ItemGroup>
 
 </Project>
