@@ -38,12 +38,12 @@ namespace xelas_not_so_convenient_mysql_interface.Data
                     comm.ExecuteNonQuery();
                     stopwatch_query.Stop();
 
-                    MySqlDataAdapter sda = new MySqlDataAdapter(comm);
-                    DataTable dt = new DataTable("Query_result");
+                    MySqlDataAdapter data_adapter = new MySqlDataAdapter(comm);
+                    DataTable data_table = new DataTable("Query_result");
 
                     stopwatch_population.Start();
-                    sda.Fill(dt);
-                    window.query_data_grid.ItemsSource = dt.DefaultView;
+                    data_adapter.Fill(data_table);
+                    window.query_data_grid.ItemsSource = data_table.DefaultView;
                     stopwatch_population.Stop();
                 }
                 catch (Exception ex)
