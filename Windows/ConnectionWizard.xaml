@@ -7,16 +7,15 @@
         mc:Ignorable="d"
         Title="ConnectionWizard" Height="450" Width="800">
     <Grid>
-        <Label Content="Hello and welcome to the wizard that will generate your connection.json for the first time! This guid emay be inaccurate and for any problem&#xD;&#xA;please leave an issue in the github page!" Margin="10,10,0,0" Height="44" VerticalAlignment="Top" HorizontalAlignment="Left" Width="780"/>
-        <Label Content="First what's the ip of the database?" Margin="10,59,0,0" HorizontalAlignment="Left" Width="195" Height="25" VerticalAlignment="Top"/>
-        <TextBox x:Name="db_ip" Margin="15,89,0,0" TextWrapping="Wrap" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="190"/>
-        <Label Content="What's the name of the database?" Margin="10,124,0,0" HorizontalAlignment="Left" Width="195" Height="25" VerticalAlignment="Top"/>
-        <TextBox x:Name="db_name" Margin="15,154,0,0" TextWrapping="Wrap" HorizontalAlignment="Left" Width="190" Height="20" VerticalAlignment="Top"/>
-        <Label Content="Now for the username" Margin="10,194,0,0" HorizontalAlignment="Left" Width="195" Height="25" VerticalAlignment="Top"/>
-        <TextBox x:Name="username" Margin="15,224,0,0" TextWrapping="Wrap" HorizontalAlignment="Left" Width="190" Height="20" VerticalAlignment="Top"/>
-        <Label Content="What's the name of the database?" Margin="10,259,0,0" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Width="195"/>
-        <PasswordBox x:Name="username_password" Margin="15,289,0,0" HorizontalAlignment="Left" Width="190" Height="20" VerticalAlignment="Top"/>
-        <Button x:Name="write_button" Content="Go!" Margin="0,0,10,10" Click="write_button_Click" HorizontalAlignment="Right" Width="95" Height="25" VerticalAlignment="Bottom"/>
-
+        <Label Content="Hello and welcome to the wizard that will generate your connection.json for the first time! This guid emay be inaccurate and for any problem&#xD;&#xA;please leave an issue in the github page!" Margin="10,10,0,0" Height="44" VerticalAlignment="Top" HorizontalAlignment="Left" Width="780" />
+        <Label Content="First what's the ip of the database?" Margin="10,59,0,0" HorizontalAlignment="Left" Width="195" Height="25" VerticalAlignment="Top" />
+        <TextBox x:Name="db_ip" Margin="15,89,0,0" TextWrapping="Wrap" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="190" />
+        <Label Content="What's the name of the database?" Margin="10,124,0,0" HorizontalAlignment="Left" Width="195" Height="25" VerticalAlignment="Top" />
+        <TextBox x:Name="db_name" Margin="15,154,0,0" TextWrapping="Wrap" HorizontalAlignment="Left" Width="190" Height="20" VerticalAlignment="Top" />
+        <Label Content="Now for the username" Margin="10,194,0,0" HorizontalAlignment="Left" Width="195" Height="25" VerticalAlignment="Top" />
+        <TextBox x:Name="username" Margin="15,224,0,0" TextWrapping="Wrap" HorizontalAlignment="Left" Width="190" Height="20" VerticalAlignment="Top" />
+        <Label Content="What's the name of the database?" Margin="10,259,0,0" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Width="195" />
+        <PasswordBox x:Name="username_password" Margin="15,289,0,0" HorizontalAlignment="Left" Width="190" Height="20" VerticalAlignment="Top" />
+        <Button x:Name="write_button" Content="Go!" Margin="0,0,10,10" Click="write_button_Click" HorizontalAlignment="Right" Width="95" Height="25" VerticalAlignment="Bottom" />
     </Grid>
 </Window>

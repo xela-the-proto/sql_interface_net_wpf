@@ -42,7 +42,6 @@ namespace xelas_not_so_convenient_mysql_interface.DB
                 Application.Current.Shutdown();
             }
             window.status_text_connection.Text = "Connection status: Open";
-            
         }
 
         public void connect(string conn_string)

@@ -17,7 +17,7 @@ namespace xelas_not_so_convenient_mysql_interface.Data
             {
                 Directory.CreateDirectory(dir);
             }
-            ConnectionWizard wizard  = new ConnectionWizard();
+            ConnectionWizard wizard = new ConnectionWizard();
             wizard.ShowDialog();
         }
 

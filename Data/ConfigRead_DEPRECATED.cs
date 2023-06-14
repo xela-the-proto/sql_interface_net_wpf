@@ -3,7 +3,9 @@ using System;
 using System.Windows;
 using System.Xml;
 using System.Xml.Linq;
-#pragma warning disable 
+
+#pragma warning disable
+
 namespace xelas_not_so_convenient_mysql_interface.Data
 {
     internal class ConfigRead_DEPRECATED

@@ -50,7 +50,7 @@ namespace xelas_not_so_convenient_mysql_interface.Data
                 {
                     MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-                
+
                 TimeSpan query_elapsed = stopwatch_query.Elapsed;
                 TimeSpan population_elapsed = stopwatch_population.Elapsed;
                 if (comm.CommandText.Contains("SELECT"))
@@ -74,9 +74,8 @@ namespace xelas_not_so_convenient_mysql_interface.Data
                 }
                 else
                 {
-                    MessageBox.Show("Done! Lines affected " + rows_Affected + "","Query",MessageBoxButton.OK,MessageBoxImage.Question);
+                    MessageBox.Show("Done! Lines affected " + rows_Affected + "", "Query", MessageBoxButton.OK, MessageBoxImage.Question);
                 }
-                
             });
         }
     }
