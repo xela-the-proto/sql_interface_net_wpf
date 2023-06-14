@@ -1,5 +1,6 @@
 ﻿using sql_interface_net_wpf.DB;
 using System;
+using System.IO;
 using System.Windows;
 using xelas_not_so_convenient_mysql_interface.Data;
 using xelas_not_so_convenient_mysql_interface.DB;
@@ -19,6 +20,10 @@ namespace sql_interface_net_wpf
         public MainWindow()
         {
             InitializeComponent();
+            if (!File.Exists(".\\Config\\connection.json"))
+            {
+                jsonReadWrite.writeConnectionJSON();
+            }
         }
 
         private void Json_connect(object sender, RoutedEventArgs e)

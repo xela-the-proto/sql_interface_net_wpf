@@ -2,6 +2,8 @@
 using System.IO;
 using System.Windows;
 using xelas_not_so_convenient_mysql_interface.JSONClasses;
+using xelas_not_so_convenient_mysql_interface.Windows;
+using Settings = xelas_not_so_convenient_mysql_interface.JSONClasses.Settings;
 
 namespace xelas_not_so_convenient_mysql_interface.Data
 {
@@ -15,13 +17,8 @@ namespace xelas_not_so_convenient_mysql_interface.Data
             {
                 Directory.CreateDirectory(dir);
             }
-            Connection connection = new Connection("192.168.1.140", "employees", "root", "root");
-            using (StreamWriter file = File.CreateText(".\\Config\\connection.json"))
-            {
-                JsonSerializer serializer = new JsonSerializer();
-                serializer.Serialize(file, connection);
-                MessageBox.Show("wrote to file");
-            }
+            ConnectionWizard wizard  = new ConnectionWizard();
+            wizard.ShowDialog();
         }
 
         public Connection readConnectionJSON()
