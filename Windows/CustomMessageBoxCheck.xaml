@@ -7,7 +7,6 @@
         mc:Ignorable="d"
         Title="CustomMessageBoxCheck" Height="125" Width="260">
     <Grid>
-        <TextBlock Margin="22,42,23,46" TextWrapping="Wrap" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment"><Run Language="it-it" Text="The program will now parse the settings "/></TextBlock>
-
+        <TextBlock Margin="22,42,23,46" TextWrapping="Wrap" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment"><Run Language="it-it" Text="The program will now parse the settings " /></TextBlock>
     </Grid>
 </Window>

@@ -11,19 +11,19 @@ namespace xelas_not_so_convenient_mysql_interface.Data
 {
     internal class PopulateGrid
     {
-        MySqlCommand comm = new MySqlCommand();
-        xelas_not_so_convenient_mysql_interface.JSONClasses.Settings settings = new Settings();
-        Stopwatch stopwatch_query = new Stopwatch();
-        Stopwatch stopwatch_population = new Stopwatch();
-        JSONReadWrite json = new JSONReadWrite();
+        private MySqlCommand comm = new MySqlCommand();
+        private xelas_not_so_convenient_mysql_interface.JSONClasses.Settings settings = new Settings();
+        private Stopwatch stopwatch_query = new Stopwatch();
+        private Stopwatch stopwatch_population = new Stopwatch();
+        private JSONReadWrite json = new JSONReadWrite();
+
         public void initPopulator(MySqlCommand comm)
         {
             this.comm = comm;
         }
-        
+
         public void populateGrid()
         {
-
             Application.Current.Dispatcher.Invoke(() =>
             {
                 MainWindow window = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
@@ -34,55 +34,49 @@ namespace xelas_not_so_convenient_mysql_interface.Data
                 int rows_Affected = 0;
                 try
                 {
-                    MessageBox.Show("!!ATTENTION!!\n After closing this box the program might hang for a while depending on the query size\n Im experimenting in making it a thread", "warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                     stopwatch_query.Start();
                     comm.ExecuteNonQuery();
                     stopwatch_query.Stop();
 
-                    MySqlDataAdapter sda = new MySqlDataAdapter(comm);
-                    DataTable dt = new DataTable("Query_result");
+                    MySqlDataAdapter data_adapter = new MySqlDataAdapter(comm);
+                    DataTable data_table = new DataTable("Query_result");
 
                     stopwatch_population.Start();
-                    sda.Fill(dt);
-                    window.query_data_grid.ItemsSource = dt.DefaultView;
+                    data_adapter.Fill(data_table);
+                    window.query_data_grid.ItemsSource = data_table.DefaultView;
                     stopwatch_population.Stop();
                 }
                 catch (Exception ex)
                 {
-
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-                finally
-                {
-                    TimeSpan query_elapsed = stopwatch_query.Elapsed;
-                    TimeSpan population_elapsed = stopwatch_population.Elapsed;
-                    if (comm.CommandText.Contains("SELECT"))
-                    {
-                        /*
-                        MessageBox.Show("Query done!\nTime to query " + query_elapsed +"\nTime to populate" + population_elapsed, "Query", MessageBoxButton.OK, MessageBoxImage.Question);
-                        */
-                        stopwatch_population.Reset();
-                        stopwatch_query.Reset();
 
-                        if (settings.verbose_times)
-                        {
-                            window.status_s_query.Text = "Last population time =" + query_elapsed.TotalSeconds + "s";
-                            window.status_s_popul.Text = "Last query time =" + population_elapsed.TotalSeconds + "s";
-                        }
-                        else if (!settings.verbose_times)
-                        {
-                            window.status_s_query.Text = "Last population time =" + query_elapsed.Seconds + "s";
-                            window.status_s_popul.Text = "Last query time =" + population_elapsed.Seconds + "s";
-                        }
-                    }
-                    else
+                TimeSpan query_elapsed = stopwatch_query.Elapsed;
+                TimeSpan population_elapsed = stopwatch_population.Elapsed;
+                if (comm.CommandText.Contains("SELECT"))
+                {
+                    /*
+                    MessageBox.Show("Query done!\nTime to query " + query_elapse    +"\nTimetopopulate"+population_elapsed,"Query",MessageBoxButton.OK, MessageBoxImage.Question);
+                    */
+                    stopwatch_population.Reset();
+                    stopwatch_query.Reset();
+
+                    if (settings.verbose_times)
                     {
-                        MessageBox.Show("Done! Lines affected " + rows_Affected + "", "Query", MessageBoxButton.OK, MessageBoxImage.Question);
+                        window.status_s_query.Text = "Last population time =" + query_elapsed.TotalSeconds + "s";
+                        window.status_s_popul.Text = "Last query time =" + population_elapsed.TotalSeconds + "s";
                     }
-                    
+                    else if (!settings.verbose_times)
+                    {
+                        window.status_s_query.Text = "Last population time =" + query_elapsed.Seconds + "s";
+                        window.status_s_popul.Text = "Last query time =" + population_elapsed.Seconds + "s";
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Done! Lines affected " + rows_Affected + "", "Query", MessageBoxButton.OK, MessageBoxImage.Question);
                 }
             });
-
-            
         }
     }
 }

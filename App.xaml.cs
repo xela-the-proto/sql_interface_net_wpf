@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
-using xelas_not_so_convenient_mysql_interface.Windows;
+﻿using System.Windows;
 
 namespace sql_interface_net_wpf
 {
@@ -14,7 +7,7 @@ namespace sql_interface_net_wpf
     /// </summary>
     public partial class App : Application
     {
-        void App_Startup(object sender, StartupEventArgs e)
+        private void App_Startup(object sender, StartupEventArgs e)
         {
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();

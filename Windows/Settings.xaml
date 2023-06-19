@@ -7,7 +7,6 @@
         mc:Ignorable="d"
         Title="Settings" Height="450" Width="265" Closed="Window_closed" Activated="Window_Activated">
     <Grid>
-        <CheckBox x:Name="checkbox_times_verbose" Content="Precise query times" Margin="10,12,10,0" d:LayoutOverrides="HorizontalAlignment" Height="20" VerticalAlignment="Top"/>
-
+        <CheckBox x:Name="checkbox_times_verbose" Content="Precise query times" Margin="10,12,10,0" d:LayoutOverrides="HorizontalAlignment" Height="20" VerticalAlignment="Top" />
     </Grid>
 </Window>

@@ -4,6 +4,8 @@ using System.Windows;
 using System.Xml;
 using System.Xml.Linq;
 
+#pragma warning disable
+
 namespace xelas_not_so_convenient_mysql_interface.Data
 {
     internal class ConfigRead_DEPRECATED
@@ -16,6 +18,7 @@ namespace xelas_not_so_convenient_mysql_interface.Data
          *
          *
          */
+
         private string db_ip;
         private string db_name;
         private string user_id;
@@ -27,8 +30,6 @@ namespace xelas_not_so_convenient_mysql_interface.Data
         private string conn_string;
 
         public bool verbose_time;
-
-
 
         public void readConnConfig()
         {
@@ -83,7 +84,6 @@ namespace xelas_not_so_convenient_mysql_interface.Data
                     MessageBox.Show("no file was selected!", "Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
-            
         }
 
         public string getConnString()
@@ -103,7 +103,7 @@ namespace xelas_not_so_convenient_mysql_interface.Data
             {
                 if (reader.IsStartElement())
                 {
-                    //return only when you have START tag  
+                    //return only when you have START tag
                     switch (reader.Name)
                     {
                         case "verbose_times":
@@ -119,7 +119,6 @@ namespace xelas_not_so_convenient_mysql_interface.Data
 
             reader.Close();
         }
-
 
         public bool VerboseTime
         {
