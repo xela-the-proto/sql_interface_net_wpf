@@ -8,4 +8,4 @@
 | < 0.2   | :x:                |
 
 ## Reporting a Vulnerability
-report on the issues tab
+report on the security tab
